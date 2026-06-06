@@ -1,0 +1,789 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Six-Month Strength Programme</title>
+  <meta name="description" content="A focused six-month, 20-minute strength programme for kettlebell and dumbbell training at home." />
+  <meta name="theme-color" content="#111510" />
+  <meta property="og:title" content="Six-Month Strength Programme" />
+  <meta property="og:description" content="Three short home strength sessions per week, built for consistency, cycling support, and long-term habit." />
+  <meta property="og:type" content="website" />
+  <style>
+    :root {
+      --ink: #171d16;
+      --paper: #f5f2ea;
+      --paper-2: #ebe3d3;
+      --line: rgba(23, 29, 22, .16);
+      --muted: #5f675b;
+      --forest: #1f3d2b;
+      --moss: #7a9b57;
+      --rust: #b6532d;
+      --gold: #d6a544;
+      --white: #fffaf0;
+      --shadow: 0 24px 70px rgba(23, 29, 22, .16);
+      --radius: 8px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Avenir Next, Avenir, "Segoe UI", sans-serif;
+      background:
+        linear-gradient(135deg, rgba(31, 61, 43, .08) 25%, transparent 25%) 0 0 / 34px 34px,
+        linear-gradient(315deg, rgba(182, 83, 45, .07) 25%, transparent 25%) 0 0 / 34px 34px,
+        var(--paper);
+      color: var(--ink);
+      line-height: 1.55;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(180deg, rgba(245, 242, 234, .32), rgba(245, 242, 234, .92) 34rem);
+      z-index: -1;
+    }
+
+    h1, h2, h3 { line-height: 1.05; margin: 0; }
+    h1 {
+      max-width: 860px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(3rem, 9vw, 7.5rem);
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+    h2 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2rem, 4vw, 3.3rem);
+      margin-bottom: 1rem;
+    }
+    h3 { font-size: 1rem; text-transform: uppercase; letter-spacing: .08em; }
+    p, li, td { color: var(--muted); }
+    a { color: inherit; }
+    button, input { font: inherit; }
+
+    .site-header {
+      min-height: 92vh;
+      display: grid;
+      align-items: end;
+      padding: clamp(1rem, 3vw, 2rem);
+      background:
+        linear-gradient(90deg, rgba(17, 21, 16, .78), rgba(17, 21, 16, .32), rgba(17, 21, 16, .08)),
+        url("https://images.unsplash.com/photo-1599058917212-d750089bc07e?auto=format&fit=crop&w=1800&q=82") center / cover;
+      color: var(--white);
+    }
+
+    .hero {
+      width: min(1120px, 100%);
+      margin: 0 auto;
+      padding-bottom: clamp(2rem, 8vh, 5rem);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: .55rem;
+      margin-bottom: 1rem;
+      color: #f1d38d;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      font-size: .82rem;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 2.2rem;
+      height: 2px;
+      background: currentColor;
+    }
+
+    .tagline {
+      max-width: 700px;
+      margin: 1.1rem 0 1.4rem;
+      color: rgba(255, 250, 240, .88);
+      font-size: clamp(1.05rem, 2.1vw, 1.35rem);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .75rem;
+      align-items: center;
+    }
+
+    .button {
+      display: inline-flex;
+      min-height: 2.9rem;
+      align-items: center;
+      justify-content: center;
+      gap: .55rem;
+      padding: .8rem 1rem;
+      border: 1px solid transparent;
+      border-radius: var(--radius);
+      background: var(--gold);
+      color: #1d1608;
+      font-weight: 850;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .button.secondary {
+      border-color: rgba(255,255,255,.42);
+      background: rgba(255,255,255,.12);
+      color: var(--white);
+      backdrop-filter: blur(10px);
+    }
+
+    .stats {
+      width: min(1120px, calc(100% - 2rem));
+      margin: -3rem auto 0;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      background: var(--white);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      border-radius: var(--radius);
+      overflow: hidden;
+      position: relative;
+      z-index: 2;
+    }
+
+    .stat {
+      padding: 1rem;
+      border-right: 1px solid var(--line);
+    }
+    .stat:last-child { border-right: 0; }
+    .stat strong {
+      display: block;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.55rem, 3vw, 2.2rem);
+      color: var(--forest);
+    }
+    .stat span {
+      display: block;
+      color: var(--muted);
+      font-size: .92rem;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      margin-top: 1.5rem;
+      background: rgba(245, 242, 234, .9);
+      border-block: 1px solid var(--line);
+      backdrop-filter: blur(14px);
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+
+    nav .inner {
+      width: min(1120px, 100%);
+      margin: auto;
+      padding: .65rem 1rem;
+      display: flex;
+      gap: .45rem;
+    }
+
+    nav a {
+      padding: .55rem .75rem;
+      border-radius: var(--radius);
+      color: var(--forest);
+      font-size: .92rem;
+      font-weight: 800;
+      text-decoration: none;
+    }
+    nav a:hover { background: rgba(31, 61, 43, .1); }
+
+    main {
+      width: min(1120px, 100%);
+      margin: 0 auto;
+      padding: 1rem;
+    }
+
+    section {
+      padding: clamp(2.4rem, 6vw, 4.5rem) 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, .85fr) minmax(240px, .5fr);
+      gap: 2rem;
+      align-items: end;
+      margin-bottom: 1.35rem;
+    }
+
+    .section-head p { margin: 0; font-size: 1.05rem; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .card {
+      background: rgba(255, 250, 240, .86);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 1rem;
+      box-shadow: 0 10px 30px rgba(23, 29, 22, .06);
+    }
+
+    .card h3 { color: var(--forest); margin-bottom: .45rem; }
+    .card p, .card ul, .card ol { margin-bottom: 0; }
+
+    .callout {
+      margin-top: 1rem;
+      padding: 1rem;
+      border-left: 5px solid var(--rust);
+      background: rgba(182, 83, 45, .1);
+      border-radius: var(--radius);
+      color: var(--ink);
+    }
+
+    .callout strong { color: var(--rust); }
+
+    .phase-grid {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(150px, 1fr));
+      gap: .75rem;
+      overflow-x: auto;
+      padding-bottom: .25rem;
+    }
+
+    .phase {
+      min-height: 14rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: .95rem;
+    }
+
+    .phase-number {
+      width: 2.3rem;
+      height: 2.3rem;
+      display: grid;
+      place-items: center;
+      margin-bottom: .75rem;
+      background: var(--forest);
+      color: var(--white);
+      border-radius: 50%;
+      font-weight: 900;
+    }
+
+    .phase small {
+      color: var(--rust);
+      font-weight: 850;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    .session-grid {
+      display: grid;
+      grid-template-columns: .7fr 1fr 1fr;
+      gap: 1rem;
+      align-items: start;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: .75rem;
+      overflow: hidden;
+      border-radius: var(--radius);
+      background: rgba(255, 250, 240, .72);
+    }
+
+    th, td {
+      text-align: left;
+      padding: .72rem;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+    }
+    th {
+      color: var(--ink);
+      background: rgba(122, 155, 87, .18);
+      font-size: .84rem;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+    tr:last-child td { border-bottom: 0; }
+
+    .exercise-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: .75rem;
+    }
+
+    details.exercise {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .exercise summary {
+      cursor: pointer;
+      padding: 1rem;
+      color: var(--forest);
+      font-weight: 900;
+      list-style: none;
+    }
+    .exercise summary::-webkit-details-marker { display: none; }
+    .exercise summary::after {
+      content: "+";
+      float: right;
+      color: var(--rust);
+      font-size: 1.2rem;
+    }
+    .exercise[open] summary::after { content: "-"; }
+    .exercise p { margin: 0; padding: 0 1rem 1rem; }
+
+    .video {
+      aspect-ratio: 16 / 9;
+      width: calc(100% - 2rem);
+      margin: 0 1rem 1rem;
+      border: 0;
+      border-radius: var(--radius);
+      background: #111;
+    }
+
+    .tracker-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .75rem;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+      padding: 1rem;
+      background: var(--forest);
+      color: var(--white);
+      border-radius: var(--radius);
+    }
+
+    .progress-wrap {
+      min-width: min(100%, 360px);
+      flex: 1;
+    }
+    .progress-label {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: .4rem;
+      font-weight: 850;
+    }
+    .progress-track {
+      height: .75rem;
+      overflow: hidden;
+      border-radius: 999px;
+      background: rgba(255,255,255,.2);
+    }
+    .progress-fill {
+      width: 0%;
+      height: 100%;
+      background: var(--gold);
+      transition: width .25s ease;
+    }
+
+    .tracker {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: .75rem;
+    }
+
+    .week-card {
+      padding: .85rem;
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+    }
+    .week-card.complete {
+      border-color: rgba(31, 61, 43, .4);
+      background: rgba(122, 155, 87, .16);
+    }
+    .week-card h3 {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: .45rem;
+      color: var(--ink);
+    }
+    .week-card small { color: var(--muted); letter-spacing: 0; text-transform: none; }
+
+    .check-row {
+      display: flex;
+      gap: .55rem;
+      align-items: center;
+      min-height: 2rem;
+      color: var(--muted);
+      cursor: pointer;
+    }
+
+    input[type="checkbox"] {
+      width: 1.05rem;
+      height: 1.05rem;
+      accent-color: var(--forest);
+    }
+
+    .rules {
+      columns: 2;
+      column-gap: 2rem;
+      padding-left: 1.4rem;
+    }
+    .rules li { break-inside: avoid; margin-bottom: .65rem; }
+
+    footer {
+      width: min(1120px, 100%);
+      margin: 0 auto;
+      padding: 1.5rem 1rem 2.5rem;
+      color: var(--muted);
+      font-size: .92rem;
+    }
+
+    @media (max-width: 860px) {
+      .site-header { min-height: 86vh; background-position: 58% center; }
+      .stats { grid-template-columns: repeat(2, 1fr); margin-top: -2rem; }
+      .stat:nth-child(2) { border-right: 0; }
+      .stat:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+      .section-head, .session-grid { grid-template-columns: 1fr; }
+      .grid, .exercise-list, .tracker { grid-template-columns: 1fr; }
+      .phase-grid { grid-template-columns: repeat(6, minmax(210px, 1fr)); }
+      .rules { columns: 1; }
+    }
+
+    @media (max-width: 520px) {
+      .site-header { padding: 1rem; }
+      .hero-actions { align-items: stretch; }
+      .button { width: 100%; }
+      .stats { width: calc(100% - 1rem); grid-template-columns: 1fr; }
+      .stat { border-right: 0; border-bottom: 1px solid var(--line); }
+      .stat:last-child { border-bottom: 0; }
+      th, td { padding: .62rem; }
+    }
+
+    @media print {
+      .site-header, nav, iframe, .tracker-toolbar, button { display: none !important; }
+      body { background: white; color: black; }
+      body::before { display: none; }
+      main, footer { width: 100%; }
+      section, .card, .phase, details.exercise, .week-card, .stats { box-shadow: none; background: white; color: black; }
+      p, li, td { color: #222; }
+      section { page-break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="hero">
+      <span class="eyebrow">Home strength plan</span>
+      <h1>Six-Month Strength Programme</h1>
+      <p class="tagline">Short kettlebell and dumbbell sessions built around good reps, steady progression, and a plan that survives busy weeks.</p>
+      <div class="hero-actions">
+        <a class="button" href="#sessions" aria-label="Jump to the weekly training sessions">Start training</a>
+        <a class="button secondary" href="#tracker" aria-label="Jump to the weekly progress tracker">Open tracker</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="stats" aria-label="Programme summary">
+    <div class="stat"><strong>24</strong><span>weeks of progression</span></div>
+    <div class="stat"><strong>20</strong><span>minutes per session</span></div>
+    <div class="stat"><strong>3+1</strong><span>sessions per week</span></div>
+    <div class="stat"><strong>2</strong><span>core workouts</span></div>
+  </div>
+
+  <nav aria-label="Page sections">
+    <div class="inner">
+      <a href="#start">Start</a>
+      <a href="#programme">Programme</a>
+      <a href="#sessions">Sessions</a>
+      <a href="#exercises">Exercise library</a>
+      <a href="#tracker">Tracker</a>
+      <a href="#rules">Rules</a>
+    </div>
+  </nav>
+
+  <main>
+    <section id="start">
+      <div class="section-head">
+        <div>
+          <h2>Start here</h2>
+          <p>Use this as a low-friction strength habit: enough stimulus to matter, not so much soreness that it interferes with cycling or life.</p>
+        </div>
+        <p>Default rhythm: Monday, Wednesday, Friday. Sunday is optional when recovery and schedule allow.</p>
+      </div>
+      <div class="grid">
+        <article class="card">
+          <h3>Goal</h3>
+          <p>Build strength, preserve muscle, improve posture, support mood, and protect the lower back.</p>
+        </article>
+        <article class="card">
+          <h3>Effort</h3>
+          <p>Finish most sets with 2-3 good reps in reserve. Smooth form beats fatigue chasing.</p>
+        </article>
+        <article class="card">
+          <h3>Equipment</h3>
+          <p>One kettlebell, a pair of dumbbells or handheld weights, and enough floor space to move cleanly.</p>
+        </article>
+      </div>
+      <p class="callout"><strong>Safety:</strong> Stop if you get chest pain, faintness, severe breathlessness, sharp joint pain, neurological symptoms, or back pain that does not settle. Get medical advice if unsure.</p>
+    </section>
+
+    <section id="programme">
+      <div class="section-head">
+        <div>
+          <h2>Six-month build</h2>
+          <p>Each phase has one job. Stay with the phase you are in, then progress when the work feels repeatable.</p>
+        </div>
+      </div>
+      <div class="phase-grid">
+        <article class="phase">
+          <div><div class="phase-number">1</div><small>Weeks 1-4</small><h3>Learn the movements</h3></div>
+          <p>Three sessions weekly. Two to three rounds. Easy weights. Hold swings until the hinge is comfortable.</p>
+        </article>
+        <article class="phase">
+          <div><div class="phase-number">2</div><small>Weeks 5-8</small><h3>Build consistency</h3></div>
+          <p>Three sessions weekly. Three rounds. Add reverse lunges and increase reps gradually.</p>
+        </article>
+        <article class="phase">
+          <div><div class="phase-number">3</div><small>Weeks 9-12</small><h3>Practice swings</h3></div>
+          <p>Start with two sets of ten swings, then complete the normal strength work.</p>
+        </article>
+        <article class="phase">
+          <div><div class="phase-number">4</div><small>Weeks 13-16</small><h3>Load progressively</h3></div>
+          <p>Three to four rounds. Add load once twelve clean reps are comfortable.</p>
+        </article>
+        <article class="phase">
+          <div><div class="phase-number">5</div><small>Weeks 17-20</small><h3>Condition strength</h3></div>
+          <p>Use circuits with a swing, squat or hinge, row or press, and carry or core slot.</p>
+        </article>
+        <article class="phase">
+          <div><div class="phase-number">6</div><small>Weeks 21-24</small><h3>Maintain the habit</h3></div>
+          <p>Repeat A/B sessions, progress slowly, and keep the routine alive without chasing exhaustion.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="sessions">
+      <div class="section-head">
+        <div>
+          <h2>The sessions</h2>
+          <p>Warm up, alternate Session A and Session B, and add swing practice from week 9 once technique is solid.</p>
+        </div>
+      </div>
+      <div class="session-grid">
+        <article class="card">
+          <h3>Warm-up: 2 minutes</h3>
+          <ul>
+            <li>March on spot: 30 seconds</li>
+            <li>Arm circles: 30 seconds</li>
+            <li>Hip hinges: 30 seconds</li>
+            <li>Bodyweight squats: 30 seconds</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Session A</h3>
+          <table>
+            <thead><tr><th>Exercise</th><th>Start</th></tr></thead>
+            <tbody>
+              <tr><td>Goblet squat</td><td>8 reps</td></tr>
+              <tr><td>One-arm row</td><td>8 each side</td></tr>
+              <tr><td>Overhead press</td><td>8 reps</td></tr>
+              <tr><td>Farmer carry</td><td>30 seconds</td></tr>
+            </tbody>
+          </table>
+          <p>Weeks 1-4: 2-3 rounds. Later: 3-4 rounds.</p>
+        </article>
+        <article class="card">
+          <h3>Session B</h3>
+          <table>
+            <thead><tr><th>Exercise</th><th>Start</th></tr></thead>
+            <tbody>
+              <tr><td>Romanian deadlift</td><td>8 reps</td></tr>
+              <tr><td>Floor press</td><td>8 reps</td></tr>
+              <tr><td>Reverse lunge</td><td>6 each side</td></tr>
+              <tr><td>Plank</td><td>20 seconds</td></tr>
+            </tbody>
+          </table>
+          <p>Start lunges in week 5 if the first month needs to be gentler.</p>
+        </article>
+      </div>
+      <p class="callout"><strong>From week 9:</strong> add swing practice at the start. Weeks 9-12: 2 x 10 swings. Weeks 13-16: 3 x 10-15 swings. From week 17: 15 swings in each circuit if technique is clean.</p>
+    </section>
+
+    <section id="exercises">
+      <div class="section-head">
+        <div>
+          <h2>Exercise library</h2>
+          <p>Open any exercise for a plain-English cue and a demonstration video.</p>
+        </div>
+      </div>
+      <div class="exercise-list">
+        <details class="exercise">
+          <summary>Goblet squat</summary>
+          <p>Hold the kettlebell close to your chest. Sit down between your hips as if lowering into a chair. Keep your chest up and stand by pushing the floor away.</p>
+          <iframe class="video" src="https://www.youtube.com/embed/MeIiIdhvXT4" title="Goblet squat video" allowfullscreen></iframe>
+        </details>
+        <details class="exercise">
+          <summary>Overhead press</summary>
+          <p>Hold dumbbells at shoulder height. Brace your stomach and press them overhead without leaning back. Lower under control.</p>
+          <iframe class="video" src="https://www.youtube.com/embed/qEwKCR5JCog" title="Overhead press video" allowfullscreen></iframe>
+        </details>
+        <details class="exercise">
+          <summary>One-arm row</summary>
+          <p>Support one hand on a chair or bench. Pull the weight towards your ribs. Keep the movement controlled and avoid twisting.</p>
+          <iframe class="video" src="https://www.youtube.com/embed/pYcpY20QaE8" title="One arm row video" allowfullscreen></iframe>
+        </details>
+        <details class="exercise">
+          <summary>Romanian deadlift</summary>
+          <p>Hold weights in front of you. Push your hips backwards while keeping your back neutral. Feel the hamstring stretch, then stand tall.</p>
+          <iframe class="video" src="https://www.youtube.com/embed/JCXUYuzwNrM" title="Romanian deadlift video" allowfullscreen></iframe>
+        </details>
+        <details class="exercise">
+          <summary>Reverse lunge</summary>
+          <p>Step backwards, lower under control, then push through the front foot to stand. Start bodyweight only if needed.</p>
+          <iframe class="video" src="https://www.youtube.com/embed/wrwwXE_x-pQ" title="Reverse lunge video" allowfullscreen></iframe>
+        </details>
+        <details class="exercise">
+          <summary>Floor press</summary>
+          <p>Lie on the floor holding dumbbells. Press them up like a bench press. The floor limits shoulder strain.</p>
+          <iframe class="video" src="https://www.youtube.com/embed/uUGDRwge4F8" title="Floor press video" allowfullscreen></iframe>
+        </details>
+        <details class="exercise">
+          <summary>Farmer carry</summary>
+          <p>Pick up weights, stand tall, shoulders back, core tight, and walk slowly. This trains grip, posture, trunk and resilience.</p>
+          <iframe class="video" src="https://www.youtube.com/embed/Fkzk_RqlYig" title="Farmer carry video" allowfullscreen></iframe>
+        </details>
+        <details class="exercise">
+          <summary>Kettlebell swing</summary>
+          <p>This is a hip hinge, not a squat. The hips drive the bell forward. Arms stay relaxed like hooks. Learn this slowly.</p>
+          <iframe class="video" src="https://www.youtube.com/embed/YSxHifyI6s8" title="Kettlebell swing video" allowfullscreen></iframe>
+        </details>
+      </div>
+    </section>
+
+    <section id="tracker">
+      <div class="section-head">
+        <div>
+          <h2>Weekly tracker</h2>
+          <p>Ticks are stored on this device only. Clearing browser storage clears the tracker.</p>
+        </div>
+      </div>
+      <div class="tracker-toolbar">
+        <div class="progress-wrap" aria-live="polite">
+          <div class="progress-label">
+            <span id="progressText">0 of 96 sessions complete</span>
+            <span id="progressPercent">0%</span>
+          </div>
+          <div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
+        </div>
+        <button class="button" type="button" id="resetButton">Reset tracker</button>
+      </div>
+      <div class="tracker" id="trackerGrid"></div>
+    </section>
+
+    <section id="rules">
+      <div class="section-head">
+        <div>
+          <h2>Progression rules</h2>
+          <p>The rules keep the plan boring in the best way: steady, repeatable, and hard to derail.</p>
+        </div>
+      </div>
+      <ol class="rules">
+        <li>Start lighter than your ego wants.</li>
+        <li>When all reps feel easy for two sessions, increase reps before increasing weight.</li>
+        <li>When you can do 12 good reps, increase the weight slightly and return to 8 reps.</li>
+        <li>Never progress a movement that feels technically messy.</li>
+        <li>With cycling-heavy weeks, do two sessions rather than forcing four.</li>
+        <li>The programme succeeds when it becomes boringly repeatable.</li>
+      </ol>
+      <p class="callout"><strong>Minimum effective week:</strong> One Session A and one Session B. That is the fallback plan during busy clinical weeks.</p>
+    </section>
+  </main>
+
+  <footer>
+    Built as a single-file GitHub Pages site. Edit <code>index.html</code> to adjust the programme.
+  </footer>
+
+  <script>
+    const trackerGrid = document.getElementById("trackerGrid");
+    const progressText = document.getElementById("progressText");
+    const progressPercent = document.getElementById("progressPercent");
+    const progressFill = document.getElementById("progressFill");
+    const resetButton = document.getElementById("resetButton");
+    const days = ["Mon", "Wed", "Fri", "Sun optional"];
+    const totalSessions = 24 * days.length;
+
+    function updateProgress() {
+      const completed = document.querySelectorAll("#trackerGrid input:checked").length;
+      const percent = Math.round((completed / totalSessions) * 100);
+      progressText.textContent = `${completed} of ${totalSessions} sessions complete`;
+      progressPercent.textContent = `${percent}%`;
+      progressFill.style.width = `${percent}%`;
+
+      document.querySelectorAll(".week-card").forEach((card) => {
+        const checked = card.querySelectorAll("input:checked").length;
+        card.classList.toggle("complete", checked >= 3);
+        card.querySelector("small").textContent = `${checked}/4`;
+      });
+    }
+
+    for (let week = 1; week <= 24; week++) {
+      const card = document.createElement("article");
+      card.className = "week-card";
+
+      const title = document.createElement("h3");
+      title.textContent = `Week ${week}`;
+      const count = document.createElement("small");
+      count.textContent = "0/4";
+      title.appendChild(count);
+      card.appendChild(title);
+
+      days.forEach((day, index) => {
+        const id = `week-${week}-${index}`;
+        const label = document.createElement("label");
+        label.className = "check-row";
+
+        const box = document.createElement("input");
+        box.type = "checkbox";
+        box.checked = localStorage.getItem(id) === "1";
+        box.addEventListener("change", () => {
+          if (box.checked) {
+            localStorage.setItem(id, "1");
+          } else {
+            localStorage.removeItem(id);
+          }
+          updateProgress();
+        });
+
+        label.appendChild(box);
+        label.appendChild(document.createTextNode(day));
+        card.appendChild(label);
+      });
+
+      trackerGrid.appendChild(card);
+    }
+
+    resetButton.addEventListener("click", () => {
+      if (!confirm("Reset all tracker ticks?")) return;
+      Object.keys(localStorage)
+        .filter((key) => key.startsWith("week-"))
+        .forEach((key) => localStorage.removeItem(key));
+      document.querySelectorAll("#trackerGrid input").forEach((box) => {
+        box.checked = false;
+      });
+      updateProgress();
+    });
+
+    updateProgress();
+  </script>
+</body>
+</html>
