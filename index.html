@@ -433,6 +433,50 @@
       accent-color: var(--forest);
     }
 
+    .reminder-panel {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(260px, .55fr);
+      gap: 1rem;
+      align-items: start;
+      padding: 1rem;
+      background: var(--forest);
+      color: var(--white);
+      border-radius: var(--radius);
+    }
+
+    .reminder-panel p { color: rgba(255, 250, 240, .82); }
+
+    .reminder-form {
+      display: grid;
+      gap: .8rem;
+      padding: 1rem;
+      background: rgba(255, 255, 255, .1);
+      border: 1px solid rgba(255, 255, 255, .2);
+      border-radius: var(--radius);
+    }
+
+    .field {
+      display: grid;
+      gap: .35rem;
+      color: var(--white);
+      font-weight: 850;
+    }
+
+    .field input {
+      width: 100%;
+      min-height: 2.75rem;
+      padding: .65rem .75rem;
+      border: 1px solid rgba(255, 255, 255, .35);
+      border-radius: var(--radius);
+      background: var(--white);
+      color: var(--ink);
+    }
+
+    .calendar-note {
+      margin: 0;
+      font-size: .9rem;
+    }
+
     .rules {
       columns: 2;
       column-gap: 2rem;
@@ -454,6 +498,7 @@
       .stat:nth-child(2) { border-right: 0; }
       .stat:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
       .section-head, .session-grid { grid-template-columns: 1fr; }
+      .reminder-panel { grid-template-columns: 1fr; }
       .grid, .exercise-list, .tracker { grid-template-columns: 1fr; }
       .phase-grid { grid-template-columns: repeat(6, minmax(210px, 1fr)); }
       .rules { columns: 1; }
@@ -470,7 +515,7 @@
     }
 
     @media print {
-      .site-header, nav, iframe, .tracker-toolbar, button { display: none !important; }
+      .site-header, nav, iframe, .tracker-toolbar, .reminder-form, button { display: none !important; }
       body { background: white; color: black; }
       body::before { display: none; }
       main, footer { width: 100%; }
@@ -507,6 +552,7 @@
       <a href="#sessions">Sessions</a>
       <a href="#exercises">Exercise library</a>
       <a href="#tracker">Tracker</a>
+      <a href="#reminders">Reminders</a>
       <a href="#rules">Rules</a>
     </div>
   </nav>
@@ -690,6 +736,33 @@
       <div class="tracker" id="trackerGrid"></div>
     </section>
 
+    <section id="reminders">
+      <div class="section-head">
+        <div>
+          <h2>Reminder notifications</h2>
+          <p>Create a calendar file for the full 24-week plan. Import it into Apple Calendar, Google Calendar, Outlook, or your phone calendar and let the calendar handle the alerts.</p>
+        </div>
+      </div>
+      <div class="reminder-panel">
+        <div>
+          <h3>Evening routine prompts</h3>
+          <p>The calendar includes Monday, Wednesday, Friday, and optional Sunday sessions at 7:00 PM by default, with a reminder 15 minutes before each workout. The core sessions alternate A/B across the full plan.</p>
+          <p class="calendar-note">Choose the Monday you want to start on. If you pick a different day, the file will automatically move the start to the next Monday.</p>
+        </div>
+        <form class="reminder-form" id="calendarForm">
+          <label class="field" for="startDate">
+            Start date
+            <input id="startDate" name="startDate" type="date" required />
+          </label>
+          <label class="field" for="reminderTime">
+            Reminder time
+            <input id="reminderTime" name="reminderTime" type="time" value="19:00" required />
+          </label>
+          <button class="button" type="submit">Download calendar reminders</button>
+        </form>
+      </div>
+    </section>
+
     <section id="rules">
       <div class="section-head">
         <div>
@@ -719,8 +792,34 @@
     const progressPercent = document.getElementById("progressPercent");
     const progressFill = document.getElementById("progressFill");
     const resetButton = document.getElementById("resetButton");
+    const calendarForm = document.getElementById("calendarForm");
+    const startDateInput = document.getElementById("startDate");
+    const reminderTimeInput = document.getElementById("reminderTime");
     const days = ["Mon", "Wed", "Fri", "Sun optional"];
     const totalSessions = 24 * days.length;
+    const sessionNotes = {
+      "Session A": [
+        "Warm-up: march on spot, arm circles, hip hinges, bodyweight squats.",
+        "Goblet squat: 8 reps.",
+        "One-arm row: 8 each side.",
+        "Overhead press: 8 reps.",
+        "Farmer carry: 30 seconds.",
+        "Weeks 1-4: 2-3 rounds. Later: 3-4 rounds."
+      ],
+      "Session B": [
+        "Warm-up: march on spot, arm circles, hip hinges, bodyweight squats.",
+        "Romanian deadlift: 8 reps.",
+        "Floor press: 8 reps.",
+        "Reverse lunge: 6 each side.",
+        "Plank: 20 seconds.",
+        "Start lunges from week 5 if needed."
+      ],
+      "Optional Session": [
+        "Optional strength top-up or mobility session.",
+        "Keep it easy if recovery is low.",
+        "Repeat the cleaner-feeling session from the week or do light mobility."
+      ]
+    };
 
     function updateProgress() {
       const completed = document.querySelectorAll("#trackerGrid input:checked").length;
@@ -784,6 +883,141 @@
     });
 
     updateProgress();
+
+    function nextMonday(date) {
+      const result = new Date(date);
+      const day = result.getDay();
+      const diff = (8 - day) % 7 || 0;
+      result.setDate(result.getDate() + diff);
+      return result;
+    }
+
+    function formatDateInput(date) {
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, "0");
+      const day = String(date.getDate()).padStart(2, "0");
+      return `${year}-${month}-${day}`;
+    }
+
+    function formatCalendarDate(date) {
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, "0");
+      const day = String(date.getDate()).padStart(2, "0");
+      const hours = String(date.getHours()).padStart(2, "0");
+      const minutes = String(date.getMinutes()).padStart(2, "0");
+      const seconds = String(date.getSeconds()).padStart(2, "0");
+      return `${year}${month}${day}T${hours}${minutes}${seconds}`;
+    }
+
+    function escapeCalendarText(value) {
+      return value
+        .replace(/\\/g, "\\\\")
+        .replace(/;/g, "\\;")
+        .replace(/,/g, "\\,")
+        .replace(/\n/g, "\\n");
+    }
+
+    function buildCalendarFile(startDateValue, timeValue) {
+      const [hours, minutes] = timeValue.split(":").map(Number);
+      const programmeStart = nextMonday(new Date(`${startDateValue}T00:00:00`));
+      const now = formatCalendarDate(new Date());
+      const coreDays = [0, 2, 4];
+      const lines = [
+        "BEGIN:VCALENDAR",
+        "VERSION:2.0",
+        "PRODID:-//Strength Programme//Calendar Reminders//EN",
+        "CALSCALE:GREGORIAN",
+        "METHOD:PUBLISH"
+      ];
+
+      let workoutIndex = 0;
+      for (let week = 1; week <= 24; week++) {
+        coreDays.forEach((offset) => {
+          const sessionName = workoutIndex % 2 === 0 ? "Session A" : "Session B";
+          const startsAt = new Date(programmeStart);
+          startsAt.setDate(programmeStart.getDate() + ((week - 1) * 7) + offset);
+          startsAt.setHours(hours, minutes, 0, 0);
+
+          const endsAt = new Date(startsAt);
+          endsAt.setMinutes(endsAt.getMinutes() + 20);
+
+          const summary = `Week ${week}: ${sessionName}`;
+          const description = [
+            `Six-Month Strength Programme - Week ${week}`,
+            ...sessionNotes[sessionName],
+            "",
+            "Aim: finish with 2-3 good reps in reserve."
+          ].join("\n");
+
+          lines.push(
+            "BEGIN:VEVENT",
+            `UID:strength-programme-week-${week}-${offset}@drhammadkhan.github.io`,
+            `DTSTAMP:${now}`,
+            `DTSTART:${formatCalendarDate(startsAt)}`,
+            `DTEND:${formatCalendarDate(endsAt)}`,
+            `SUMMARY:${escapeCalendarText(summary)}`,
+            `DESCRIPTION:${escapeCalendarText(description)}`,
+            "BEGIN:VALARM",
+            "TRIGGER:-PT15M",
+            "ACTION:DISPLAY",
+            `DESCRIPTION:${escapeCalendarText(summary)}`,
+            "END:VALARM",
+            "END:VEVENT"
+          );
+          workoutIndex += 1;
+        });
+
+        const optionalStartsAt = new Date(programmeStart);
+        optionalStartsAt.setDate(programmeStart.getDate() + ((week - 1) * 7) + 6);
+        optionalStartsAt.setHours(hours, minutes, 0, 0);
+
+        const optionalEndsAt = new Date(optionalStartsAt);
+        optionalEndsAt.setMinutes(optionalEndsAt.getMinutes() + 20);
+
+        const optionalSummary = `Week ${week}: Optional Session`;
+        const optionalDescription = [
+          `Six-Month Strength Programme - Week ${week}`,
+          ...sessionNotes["Optional Session"],
+          "",
+          "Aim: finish feeling better than you started."
+        ].join("\n");
+
+        lines.push(
+          "BEGIN:VEVENT",
+          `UID:strength-programme-week-${week}-6@drhammadkhan.github.io`,
+          `DTSTAMP:${now}`,
+          `DTSTART:${formatCalendarDate(optionalStartsAt)}`,
+          `DTEND:${formatCalendarDate(optionalEndsAt)}`,
+          `SUMMARY:${escapeCalendarText(optionalSummary)}`,
+          `DESCRIPTION:${escapeCalendarText(optionalDescription)}`,
+          "BEGIN:VALARM",
+          "TRIGGER:-PT15M",
+          "ACTION:DISPLAY",
+          `DESCRIPTION:${escapeCalendarText(optionalSummary)}`,
+          "END:VALARM",
+          "END:VEVENT"
+        );
+      }
+
+      lines.push("END:VCALENDAR");
+      return lines.join("\r\n");
+    }
+
+    calendarForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const calendarText = buildCalendarFile(startDateInput.value, reminderTimeInput.value);
+      const blob = new Blob([calendarText], { type: "text/calendar;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "six-month-strength-programme-reminders.ics";
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(url);
+    });
+
+    startDateInput.value = formatDateInput(nextMonday(new Date()));
   </script>
 </body>
 </html>

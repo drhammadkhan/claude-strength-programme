@@ -8,6 +8,7 @@ The page includes:
 - Session A and Session B templates
 - an exercise library with demonstration videos
 - a local browser-based weekly tracker
+- downloadable 24-week calendar reminders with 7:00 PM defaults
 - responsive layout and print-friendly styles
 
 ## Run locally
