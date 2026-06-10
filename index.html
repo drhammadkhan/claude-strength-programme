@@ -5,637 +5,963 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Six-Month Strength Programme</title>
   <meta name="description" content="A focused six-month, 20-minute strength programme for kettlebell and dumbbell training at home." />
-  <meta name="theme-color" content="#111510" />
+  <meta name="theme-color" content="#0a0a0a" />
   <meta property="og:title" content="Six-Month Strength Programme" />
   <meta property="og:description" content="Three short home strength sessions per week, built for consistency, cycling support, and long-term habit." />
   <meta property="og:type" content="website" />
   <style>
     :root {
-      --ink: #171d16;
-      --paper: #f5f2ea;
-      --paper-2: #ebe3d3;
-      --line: rgba(23, 29, 22, .16);
-      --muted: #5f675b;
-      --forest: #1f3d2b;
-      --moss: #7a9b57;
-      --rust: #b6532d;
-      --gold: #d6a544;
-      --white: #fffaf0;
-      --shadow: 0 24px 70px rgba(23, 29, 22, .16);
-      --radius: 8px;
+      --bg: #0c0d0b;
+      --bg-2: #141510;
+      --bg-3: #1c1e18;
+      --surface: #222420;
+      --surface-2: #2a2d26;
+      --border: rgba(255,255,255,.08);
+      --border-2: rgba(255,255,255,.14);
+      --ink: #f0ede6;
+      --ink-2: #c8c4bb;
+      --ink-3: #7a7870;
+      --amber: #e8a020;
+      --amber-dim: rgba(232,160,32,.12);
+      --amber-dim-2: rgba(232,160,32,.2);
+      --green: #4a8c3f;
+      --green-dim: rgba(74,140,63,.15);
+      --red: #c0392b;
+      --radius-sm: 6px;
+      --radius: 12px;
+      --radius-lg: 20px;
+      --shadow: 0 2px 20px rgba(0,0,0,.4);
+      --shadow-lg: 0 8px 60px rgba(0,0,0,.5);
+      --max: 1100px;
+      --font-serif: Georgia, "Times New Roman", serif;
+      --font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
     }
 
-    * { box-sizing: border-box; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
+
     body {
-      margin: 0;
-      font-family: Avenir Next, Avenir, "Segoe UI", sans-serif;
-      background:
-        linear-gradient(135deg, rgba(31, 61, 43, .08) 25%, transparent 25%) 0 0 / 34px 34px,
-        linear-gradient(315deg, rgba(182, 83, 45, .07) 25%, transparent 25%) 0 0 / 34px 34px,
-        var(--paper);
+      font-family: var(--font-sans);
+      background: var(--bg);
       color: var(--ink);
-      line-height: 1.55;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
     }
 
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      background: linear-gradient(180deg, rgba(245, 242, 234, .32), rgba(245, 242, 234, .92) 34rem);
-      z-index: -1;
-    }
+    h1, h2, h3, h4 { line-height: 1.05; font-weight: 700; }
+    p, li, td { color: var(--ink-2); }
+    a { color: inherit; text-decoration: none; }
+    button, input, select { font: inherit; }
+    ul, ol { padding-left: 1.4rem; }
+    li { margin-bottom: .4rem; }
 
-    h1, h2, h3 { line-height: 1.05; margin: 0; }
-    h1 {
-      max-width: 860px;
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(3rem, 9vw, 7.5rem);
-      font-weight: 800;
-      letter-spacing: 0;
-    }
-    h2 {
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(2rem, 4vw, 3.3rem);
-      margin-bottom: 1rem;
-    }
-    h3 { font-size: 1rem; text-transform: uppercase; letter-spacing: .08em; }
-    p, li, td { color: var(--muted); }
-    a { color: inherit; }
-    button, input { font: inherit; }
-
-    .site-header {
-      min-height: 92vh;
+    /* ── HERO ─────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      min-height: 100svh;
       display: grid;
       align-items: end;
-      padding: clamp(1rem, 3vw, 2rem);
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
       background:
-        linear-gradient(90deg, rgba(17, 21, 16, .78), rgba(17, 21, 16, .32), rgba(17, 21, 16, .08)),
-        url("https://images.unsplash.com/photo-1599058917212-d750089bc07e?auto=format&fit=crop&w=1800&q=82") center / cover;
-      color: var(--white);
+        url("https://images.unsplash.com/photo-1599058917212-d750089bc07e?auto=format&fit=crop&w=1800&q=82")
+        center / cover no-repeat;
     }
 
-    .hero {
-      width: min(1120px, 100%);
+    .hero-bg::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        160deg,
+        rgba(10,10,9,.92) 0%,
+        rgba(10,10,9,.75) 50%,
+        rgba(10,10,9,.5) 100%
+      );
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      width: min(var(--max), 100%);
       margin: 0 auto;
-      padding-bottom: clamp(2rem, 8vh, 5rem);
+      padding: clamp(2rem, 5vw, 4rem);
+      padding-bottom: clamp(3rem, 10vh, 6rem);
     }
 
-    .eyebrow {
+    .kicker {
       display: inline-flex;
       align-items: center;
-      gap: .55rem;
-      margin-bottom: 1rem;
-      color: #f1d38d;
-      font-weight: 800;
+      gap: .6rem;
+      margin-bottom: 1.5rem;
+      color: var(--amber);
+      font-size: .78rem;
+      font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: .12em;
-      font-size: .82rem;
+      letter-spacing: .16em;
     }
 
-    .eyebrow::before {
-      content: "";
-      width: 2.2rem;
-      height: 2px;
-      background: currentColor;
+    .kicker-line {
+      width: 2rem;
+      height: 1.5px;
+      background: var(--amber);
+      flex-shrink: 0;
     }
 
-    .tagline {
-      max-width: 700px;
-      margin: 1.1rem 0 1.4rem;
-      color: rgba(255, 250, 240, .88);
-      font-size: clamp(1.05rem, 2.1vw, 1.35rem);
+    .hero h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(3.2rem, 10vw, 8rem);
+      font-weight: 700;
+      color: var(--ink);
+      max-width: 14ch;
+      line-height: .95;
+      letter-spacing: -.02em;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--amber);
+    }
+
+    .hero-sub {
+      max-width: 52ch;
+      margin-top: 1.5rem;
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: rgba(240,237,230,.7);
+      line-height: 1.6;
     }
 
     .hero-actions {
       display: flex;
       flex-wrap: wrap;
       gap: .75rem;
-      align-items: center;
+      margin-top: 2.5rem;
     }
 
-    .button {
+    .btn {
       display: inline-flex;
-      min-height: 2.9rem;
       align-items: center;
-      justify-content: center;
-      gap: .55rem;
-      padding: .8rem 1rem;
-      border: 1px solid transparent;
-      border-radius: var(--radius);
-      background: var(--gold);
-      color: #1d1608;
-      font-weight: 850;
-      text-decoration: none;
+      gap: .5rem;
+      padding: .85rem 1.5rem;
+      border-radius: var(--radius-sm);
+      font-size: .92rem;
+      font-weight: 700;
       cursor: pointer;
+      border: none;
+      transition: opacity .15s, transform .1s;
+    }
+    .btn:hover { opacity: .88; }
+    .btn:active { transform: scale(.97); }
+
+    .btn-primary {
+      background: var(--amber);
+      color: #1a0e00;
     }
 
-    .button.secondary {
-      border-color: rgba(255,255,255,.42);
-      background: rgba(255,255,255,.12);
-      color: var(--white);
+    .btn-ghost {
+      background: rgba(255,255,255,.1);
+      color: var(--ink);
+      border: 1px solid var(--border-2);
       backdrop-filter: blur(10px);
     }
 
-    .stats {
-      width: min(1120px, calc(100% - 2rem));
-      margin: -3rem auto 0;
+    /* stats strip */
+    .stats-strip {
+      background: var(--bg-2);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .stats-inner {
+      width: min(var(--max), 100%);
+      margin: 0 auto;
+      padding: 0 clamp(1rem, 3vw, 2rem);
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      background: var(--white);
-      border: 1px solid var(--line);
-      box-shadow: var(--shadow);
-      border-radius: var(--radius);
-      overflow: hidden;
-      position: relative;
-      z-index: 2;
     }
 
     .stat {
-      padding: 1rem;
-      border-right: 1px solid var(--line);
+      padding: 1.5rem 1rem;
+      border-right: 1px solid var(--border);
     }
     .stat:last-child { border-right: 0; }
-    .stat strong {
+
+    .stat-num {
       display: block;
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(1.55rem, 3vw, 2.2rem);
-      color: var(--forest);
-    }
-    .stat span {
-      display: block;
-      color: var(--muted);
-      font-size: .92rem;
+      font-family: var(--font-serif);
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      color: var(--amber);
+      line-height: 1;
+      margin-bottom: .3rem;
     }
 
+    .stat-label {
+      display: block;
+      font-size: .8rem;
+      color: var(--ink-3);
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      font-weight: 600;
+    }
+
+    /* ── NAV ──────────────────────────────────────────── */
     nav {
       position: sticky;
       top: 0;
-      z-index: 10;
-      margin-top: 1.5rem;
-      background: rgba(245, 242, 234, .9);
-      border-block: 1px solid var(--line);
-      backdrop-filter: blur(14px);
+      z-index: 100;
+      background: rgba(12,13,11,.88);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       overflow-x: auto;
-      white-space: nowrap;
+      scrollbar-width: none;
     }
+    nav::-webkit-scrollbar { display: none; }
 
-    nav .inner {
-      width: min(1120px, 100%);
-      margin: auto;
-      padding: .65rem 1rem;
+    .nav-inner {
+      width: min(var(--max), 100%);
+      margin: 0 auto;
+      padding: 0 clamp(1rem, 3vw, 2rem);
       display: flex;
-      gap: .45rem;
+      gap: .25rem;
     }
 
     nav a {
-      padding: .55rem .75rem;
-      border-radius: var(--radius);
-      color: var(--forest);
-      font-size: .92rem;
-      font-weight: 800;
-      text-decoration: none;
+      display: block;
+      padding: .9rem .85rem;
+      font-size: .82rem;
+      font-weight: 600;
+      color: var(--ink-3);
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      white-space: nowrap;
+      border-bottom: 2px solid transparent;
+      transition: color .15s, border-color .15s;
     }
-    nav a:hover { background: rgba(31, 61, 43, .1); }
+    nav a:hover { color: var(--ink); border-bottom-color: var(--amber); }
 
+    /* ── MAIN LAYOUT ──────────────────────────────────── */
     main {
-      width: min(1120px, 100%);
+      width: min(var(--max), 100%);
       margin: 0 auto;
-      padding: 1rem;
+      padding: 0 clamp(1rem, 3vw, 2rem);
     }
 
     section {
-      padding: clamp(2.4rem, 6vw, 4.5rem) 0;
-      border-bottom: 1px solid var(--line);
+      padding: clamp(3rem, 8vw, 5.5rem) 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      margin-bottom: 1rem;
+      font-size: .75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .14em;
+      color: var(--amber);
+    }
+
+    .section-label::before {
+      content: "";
+      width: 1.2rem;
+      height: 1.5px;
+      background: var(--amber);
+    }
+
+    .section-title {
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      color: var(--ink);
+      letter-spacing: -.02em;
+      margin-bottom: .75rem;
+    }
+
+    .section-lead {
+      max-width: 60ch;
+      font-size: 1.05rem;
+      color: var(--ink-2);
+      line-height: 1.65;
     }
 
     .section-head {
-      display: grid;
-      grid-template-columns: minmax(0, .85fr) minmax(240px, .5fr);
-      gap: 2rem;
-      align-items: end;
-      margin-bottom: 1.35rem;
+      margin-bottom: 2.5rem;
     }
 
-    .section-head p { margin: 0; font-size: 1.05rem; }
-
-    .grid {
+    /* ── START SECTION ────────────────────────────────── */
+    .start-grid {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-bottom: 1.5rem;
+    }
+
+    .start-card {
+      padding: 1.75rem 1.5rem;
+      background: var(--bg-2);
+    }
+
+    .start-card-icon {
+      width: 2.5rem;
+      height: 2.5rem;
+      display: grid;
+      place-items: center;
+      margin-bottom: 1rem;
+      background: var(--amber-dim);
+      border-radius: var(--radius-sm);
+      font-size: 1.1rem;
+    }
+
+    .start-card h3 {
+      font-size: .75rem;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      color: var(--amber);
+      margin-bottom: .6rem;
+    }
+
+    .start-card p { font-size: .95rem; color: var(--ink-2); }
+
+    .alert {
+      display: flex;
       gap: 1rem;
-    }
-
-    .card {
-      background: rgba(255, 250, 240, .86);
-      border: 1px solid var(--line);
+      padding: 1.25rem 1.5rem;
+      background: rgba(192,57,43,.1);
+      border: 1px solid rgba(192,57,43,.3);
       border-radius: var(--radius);
-      padding: 1rem;
-      box-shadow: 0 10px 30px rgba(23, 29, 22, .06);
+      color: var(--ink-2);
+      font-size: .92rem;
     }
 
-    .card h3 { color: var(--forest); margin-bottom: .45rem; }
-    .card p, .card ul, .card ol { margin-bottom: 0; }
+    .alert-icon { flex-shrink: 0; color: #e74c3c; font-size: 1.1rem; }
+    .alert strong { color: #e74c3c; }
 
-    .callout {
-      margin-top: 1rem;
-      padding: 1rem;
-      border-left: 5px solid var(--rust);
-      background: rgba(182, 83, 45, .1);
-      border-radius: var(--radius);
-      color: var(--ink);
-    }
-
-    .callout strong { color: var(--rust); }
-
-    .phase-grid {
+    /* ── PROGRAMME PHASES ─────────────────────────────── */
+    .phases {
       display: grid;
-      grid-template-columns: repeat(6, minmax(150px, 1fr));
-      gap: .75rem;
+      grid-template-columns: repeat(6, minmax(160px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
       overflow-x: auto;
-      padding-bottom: .25rem;
+      overflow-y: hidden;
     }
 
     .phase {
-      min-height: 14rem;
+      padding: 1.5rem 1.25rem;
+      background: var(--bg-2);
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-      background: var(--white);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: .95rem;
+      gap: .85rem;
+      min-width: 160px;
     }
 
-    .phase-number {
-      width: 2.3rem;
-      height: 2.3rem;
+    .phase-num {
+      width: 2rem;
+      height: 2rem;
       display: grid;
       place-items: center;
-      margin-bottom: .75rem;
-      background: var(--forest);
-      color: var(--white);
+      background: var(--surface-2);
       border-radius: 50%;
-      font-weight: 900;
+      font-size: .8rem;
+      font-weight: 800;
+      color: var(--amber);
     }
 
-    .phase small {
-      color: var(--rust);
-      font-weight: 850;
+    .phase-weeks {
+      font-size: .7rem;
+      font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: .08em;
+      letter-spacing: .1em;
+      color: var(--amber);
     }
 
-    .session-grid {
+    .phase h3 {
+      font-size: .88rem;
+      font-weight: 700;
+      color: var(--ink);
+      text-transform: none;
+      letter-spacing: 0;
+    }
+
+    .phase p {
+      font-size: .82rem;
+      color: var(--ink-3);
+      line-height: 1.5;
+      flex: 1;
+    }
+
+    /* ── SESSIONS ─────────────────────────────────────── */
+    .sessions-layout {
       display: grid;
-      grid-template-columns: .7fr 1fr 1fr;
-      gap: 1rem;
-      align-items: start;
+      grid-template-columns: 200px 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-bottom: 1.5rem;
+    }
+
+    .session-card {
+      background: var(--bg-2);
+      padding: 1.75rem 1.5rem;
+    }
+
+    .session-card h3 {
+      font-size: .75rem;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      color: var(--amber);
+      margin-bottom: 1.1rem;
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: .75rem;
-      overflow: hidden;
-      border-radius: var(--radius);
-      background: rgba(255, 250, 240, .72);
     }
 
     th, td {
       text-align: left;
-      padding: .72rem;
-      border-bottom: 1px solid var(--line);
+      padding: .6rem .5rem;
+      border-bottom: 1px solid var(--border);
       vertical-align: top;
+      font-size: .88rem;
     }
+
     th {
-      color: var(--ink);
-      background: rgba(122, 155, 87, .18);
-      font-size: .84rem;
+      color: var(--ink-3);
+      font-size: .72rem;
+      font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: .08em;
+      letter-spacing: .1em;
     }
+
+    td { color: var(--ink-2); }
     tr:last-child td { border-bottom: 0; }
 
-    .exercise-list {
+    .session-note {
+      margin-top: 1rem;
+      font-size: .82rem;
+      color: var(--ink-3);
+    }
+
+    .session-card ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .session-card ul li {
+      padding: .5rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: .88rem;
+      color: var(--ink-2);
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+    }
+
+    .session-card ul li::before {
+      content: "";
+      width: .35rem;
+      height: .35rem;
+      background: var(--amber);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .session-card ul li:last-child { border-bottom: 0; }
+
+    .swing-callout {
+      padding: 1.25rem 1.5rem;
+      background: var(--amber-dim);
+      border: 1px solid var(--amber-dim-2);
+      border-radius: var(--radius);
+    }
+
+    .swing-callout strong { color: var(--amber); }
+    .swing-callout p { font-size: .92rem; }
+
+    /* ── EXERCISE LIBRARY ─────────────────────────────── */
+    .exercise-grid {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: .75rem;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
     }
 
     details.exercise {
-      background: var(--white);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      overflow: hidden;
+      background: var(--bg-2);
     }
 
     .exercise summary {
       cursor: pointer;
-      padding: 1rem;
-      color: var(--forest);
-      font-weight: 900;
-      list-style: none;
-    }
-    .exercise summary::-webkit-details-marker { display: none; }
-    .exercise summary::after {
-      content: "+";
-      float: right;
-      color: var(--rust);
-      font-size: 1.2rem;
-    }
-    .exercise[open] summary::after { content: "-"; }
-    .exercise p { margin: 0; padding: 0 1rem 1rem; }
-
-    .video {
-      aspect-ratio: 16 / 9;
-      width: calc(100% - 2rem);
-      margin: 0 1rem 1rem;
-      border: 0;
-      border-radius: var(--radius);
-      background: #111;
-    }
-
-    .tracker-toolbar {
+      padding: 1.25rem 1.5rem;
       display: flex;
-      flex-wrap: wrap;
-      gap: .75rem;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 1rem;
-      padding: 1rem;
-      background: var(--forest);
-      color: var(--white);
-      border-radius: var(--radius);
+      gap: 1rem;
+      list-style: none;
+      user-select: none;
+    }
+    .exercise summary::-webkit-details-marker { display: none; }
+
+    .exercise-name {
+      font-size: .95rem;
+      font-weight: 700;
+      color: var(--ink);
     }
 
-    .progress-wrap {
-      min-width: min(100%, 360px);
-      flex: 1;
+    .exercise-toggle {
+      width: 1.5rem;
+      height: 1.5rem;
+      display: grid;
+      place-items: center;
+      background: var(--surface-2);
+      border-radius: 50%;
+      font-size: .8rem;
+      color: var(--amber);
+      flex-shrink: 0;
+      transition: background .15s;
     }
-    .progress-label {
+
+    .exercise[open] .exercise-toggle { background: var(--amber); color: #1a0e00; }
+    .exercise[open] summary { border-bottom: 1px solid var(--border); }
+
+    .exercise-body {
+      padding: 1.25rem 1.5rem;
+    }
+
+    .exercise-body p {
+      font-size: .9rem;
+      color: var(--ink-2);
+      margin-bottom: 1rem;
+    }
+
+    .video-wrap {
+      aspect-ratio: 16/9;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      background: var(--bg);
+    }
+
+    .video-wrap iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+    }
+
+    /* ── TRACKER ──────────────────────────────────────── */
+    .tracker-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      padding: 1.5rem;
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      margin-bottom: 1.5rem;
+    }
+
+    .progress-area { flex: 1; min-width: 240px; }
+
+    .progress-meta {
       display: flex;
       justify-content: space-between;
-      gap: 1rem;
-      margin-bottom: .4rem;
-      font-weight: 850;
-    }
-    .progress-track {
-      height: .75rem;
-      overflow: hidden;
-      border-radius: 999px;
-      background: rgba(255,255,255,.2);
-    }
-    .progress-fill {
-      width: 0%;
-      height: 100%;
-      background: var(--gold);
-      transition: width .25s ease;
+      align-items: baseline;
+      margin-bottom: .6rem;
     }
 
-    .tracker {
+    .progress-count {
+      font-size: .88rem;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .progress-pct {
+      font-family: var(--font-serif);
+      font-size: 1.4rem;
+      color: var(--amber);
+      font-weight: 700;
+    }
+
+    .progress-track {
+      height: 4px;
+      background: var(--surface-2);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--amber);
+      transition: width .3s ease;
+    }
+
+    .weeks-grid {
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-template-columns: repeat(6, 1fr);
       gap: .75rem;
     }
 
     .week-card {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
       padding: .85rem;
-      background: var(--white);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
+      transition: border-color .2s, background .2s;
     }
+
     .week-card.complete {
-      border-color: rgba(31, 61, 43, .4);
-      background: rgba(122, 155, 87, .16);
+      border-color: rgba(74,140,63,.5);
+      background: var(--green-dim);
     }
-    .week-card h3 {
+
+    .week-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: .45rem;
-      color: var(--ink);
+      margin-bottom: .6rem;
     }
-    .week-card small { color: var(--muted); letter-spacing: 0; text-transform: none; }
+
+    .week-num {
+      font-size: .75rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: var(--ink-3);
+    }
+
+    .week-count {
+      font-size: .7rem;
+      font-weight: 700;
+      color: var(--amber);
+    }
+
+    .week-card.complete .week-count { color: var(--green); }
 
     .check-row {
       display: flex;
-      gap: .55rem;
       align-items: center;
-      min-height: 2rem;
-      color: var(--muted);
+      gap: .5rem;
+      padding: .25rem 0;
       cursor: pointer;
+      font-size: .75rem;
+      color: var(--ink-3);
     }
+
+    .check-row:hover { color: var(--ink-2); }
 
     input[type="checkbox"] {
-      width: 1.05rem;
-      height: 1.05rem;
-      accent-color: var(--forest);
+      width: .9rem;
+      height: .9rem;
+      accent-color: var(--amber);
+      cursor: pointer;
+      flex-shrink: 0;
     }
 
-    .reminder-panel {
+    /* ── REMINDERS ────────────────────────────────────── */
+    .reminder-layout {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(260px, .55fr);
-      gap: 1rem;
+      grid-template-columns: 1fr 340px;
+      gap: 1.5rem;
       align-items: start;
-      padding: 1rem;
-      background: var(--forest);
-      color: var(--white);
-      border-radius: var(--radius);
     }
 
-    .reminder-panel p { color: rgba(255, 250, 240, .82); }
+    .reminder-info h3 {
+      font-size: .75rem;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      color: var(--amber);
+      margin-bottom: .75rem;
+    }
+
+    .reminder-info p {
+      font-size: .92rem;
+      color: var(--ink-2);
+      margin-bottom: .75rem;
+    }
 
     .reminder-form {
-      display: grid;
-      gap: .8rem;
-      padding: 1rem;
-      background: rgba(255, 255, 255, .1);
-      border: 1px solid rgba(255, 255, 255, .2);
+      padding: 1.5rem;
+      background: var(--bg-2);
+      border: 1px solid var(--border);
       border-radius: var(--radius);
+      display: grid;
+      gap: 1rem;
     }
 
     .field {
       display: grid;
-      gap: .35rem;
-      color: var(--white);
-      font-weight: 850;
+      gap: .4rem;
+    }
+
+    .field label {
+      font-size: .75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: var(--ink-3);
     }
 
     .field input {
       width: 100%;
-      min-height: 2.75rem;
-      padding: .65rem .75rem;
-      border: 1px solid rgba(255, 255, 255, .35);
-      border-radius: var(--radius);
-      background: var(--white);
+      padding: .7rem .9rem;
+      background: var(--surface);
+      border: 1px solid var(--border-2);
+      border-radius: var(--radius-sm);
       color: var(--ink);
-    }
-
-    .calendar-note {
-      margin: 0;
-      font-size: .9rem;
-    }
-
-    .rules {
-      columns: 2;
-      column-gap: 2rem;
-      padding-left: 1.4rem;
-    }
-    .rules li { break-inside: avoid; margin-bottom: .65rem; }
-
-    footer {
-      width: min(1120px, 100%);
-      margin: 0 auto;
-      padding: 1.5rem 1rem 2.5rem;
-      color: var(--muted);
       font-size: .92rem;
     }
 
-    @media (max-width: 860px) {
-      .site-header { min-height: 86vh; background-position: 58% center; }
-      .stats { grid-template-columns: repeat(2, 1fr); margin-top: -2rem; }
-      .stat:nth-child(2) { border-right: 0; }
-      .stat:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
-      .section-head, .session-grid { grid-template-columns: 1fr; }
-      .reminder-panel { grid-template-columns: 1fr; }
-      .grid, .exercise-list, .tracker { grid-template-columns: 1fr; }
-      .phase-grid { grid-template-columns: repeat(6, minmax(210px, 1fr)); }
-      .rules { columns: 1; }
+    .field input:focus {
+      outline: none;
+      border-color: var(--amber);
     }
 
-    @media (max-width: 520px) {
-      .site-header { padding: 1rem; }
-      .hero-actions { align-items: stretch; }
-      .button { width: 100%; }
-      .stats { width: calc(100% - 1rem); grid-template-columns: 1fr; }
-      .stat { border-right: 0; border-bottom: 1px solid var(--line); }
+    /* ── RULES ────────────────────────────────────────── */
+    .rules-list {
+      list-style: none;
+      padding: 0;
+      display: grid;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .rules-list li {
+      display: grid;
+      grid-template-columns: 3rem 1fr;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.25rem 1.5rem;
+      background: var(--bg-2);
+      color: var(--ink-2);
+      font-size: .95rem;
+      margin: 0;
+    }
+
+    .rule-num {
+      font-family: var(--font-serif);
+      font-size: 1.6rem;
+      color: var(--surface-2);
+      font-weight: 700;
+      line-height: 1;
+      text-align: right;
+    }
+
+    /* ── FOOTER ───────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem clamp(1rem, 3vw, 2rem);
+      font-size: .82rem;
+      color: var(--ink-3);
+      text-align: center;
+    }
+
+    footer code {
+      font-family: "SF Mono", "Fira Code", monospace;
+      color: var(--ink-2);
+      background: var(--surface);
+      padding: .1em .4em;
+      border-radius: 3px;
+    }
+
+    /* ── RESPONSIVE ───────────────────────────────────── */
+    @media (max-width: 900px) {
+      .stats-inner { grid-template-columns: repeat(2, 1fr); }
+      .stat:nth-child(2) { border-right: 0; }
+      .stat:nth-child(-n+2) { border-bottom: 1px solid var(--border); }
+      .start-grid { grid-template-columns: 1fr; }
+      .sessions-layout { grid-template-columns: 1fr; }
+      .weeks-grid { grid-template-columns: repeat(4, 1fr); }
+      .reminder-layout { grid-template-columns: 1fr; }
+      .exercise-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 600px) {
+      .weeks-grid { grid-template-columns: repeat(3, 1fr); }
+      .stats-inner { grid-template-columns: 1fr; }
+      .stat { border-right: 0; border-bottom: 1px solid var(--border); }
       .stat:last-child { border-bottom: 0; }
-      th, td { padding: .62rem; }
+      .hero-actions { flex-direction: column; }
+      .btn { width: 100%; justify-content: center; }
+    }
+
+    @media (max-width: 400px) {
+      .weeks-grid { grid-template-columns: repeat(2, 1fr); }
     }
 
     @media print {
-      .site-header, nav, iframe, .tracker-toolbar, .reminder-form, button { display: none !important; }
+      .hero, nav, iframe, .tracker-header, .reminder-form, button { display: none !important; }
       body { background: white; color: black; }
-      body::before { display: none; }
-      main, footer { width: 100%; }
-      section, .card, .phase, details.exercise, .week-card, .stats { box-shadow: none; background: white; color: black; }
-      p, li, td { color: #222; }
+      main { width: 100%; }
       section { page-break-inside: avoid; }
     }
   </style>
 </head>
 <body>
-  <header class="site-header">
-    <div class="hero">
-      <span class="eyebrow">Home strength plan</span>
-      <h1>Six-Month Strength Programme</h1>
-      <p class="tagline">Short kettlebell and dumbbell sessions built around good reps, steady progression, and a plan that survives busy weeks.</p>
+
+  <!-- ── HERO ─────────────────────────────────────────── -->
+  <header class="hero">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="hero-content">
+      <div class="kicker"><span class="kicker-line"></span>Home strength plan</div>
+      <h1>Six-Month <em>Strength</em> Programme</h1>
+      <p class="hero-sub">Short kettlebell and dumbbell sessions built around good reps, steady progression, and a plan that survives busy weeks.</p>
       <div class="hero-actions">
-        <a class="button" href="#sessions" aria-label="Jump to the weekly training sessions">Start training</a>
-        <a class="button secondary" href="#tracker" aria-label="Jump to the weekly progress tracker">Open tracker</a>
+        <a class="btn btn-primary" href="#sessions">Start training</a>
+        <a class="btn btn-ghost" href="#tracker">Open tracker</a>
       </div>
     </div>
   </header>
 
-  <div class="stats" aria-label="Programme summary">
-    <div class="stat"><strong>24</strong><span>weeks of progression</span></div>
-    <div class="stat"><strong>20</strong><span>minutes per session</span></div>
-    <div class="stat"><strong>3+1</strong><span>sessions per week</span></div>
-    <div class="stat"><strong>2</strong><span>core workouts</span></div>
+  <!-- ── STATS ─────────────────────────────────────────── -->
+  <div class="stats-strip" aria-label="Programme summary">
+    <div class="stats-inner">
+      <div class="stat"><span class="stat-num">24</span><span class="stat-label">Weeks of progression</span></div>
+      <div class="stat"><span class="stat-num">20</span><span class="stat-label">Minutes per session</span></div>
+      <div class="stat"><span class="stat-num">3+1</span><span class="stat-label">Sessions per week</span></div>
+      <div class="stat"><span class="stat-num">2</span><span class="stat-label">Core workouts</span></div>
+    </div>
   </div>
 
+  <!-- ── NAV ───────────────────────────────────────────── -->
   <nav aria-label="Page sections">
-    <div class="inner">
+    <div class="nav-inner">
       <a href="#start">Start</a>
       <a href="#programme">Programme</a>
       <a href="#sessions">Sessions</a>
-      <a href="#exercises">Exercise library</a>
+      <a href="#exercises">Exercises</a>
       <a href="#tracker">Tracker</a>
       <a href="#reminders">Reminders</a>
       <a href="#rules">Rules</a>
     </div>
   </nav>
 
+  <!-- ── MAIN ──────────────────────────────────────────── -->
   <main>
+
+    <!-- START -->
     <section id="start">
       <div class="section-head">
-        <div>
-          <h2>Start here</h2>
-          <p>Use this as a low-friction strength habit: enough stimulus to matter, not so much soreness that it interferes with cycling or life.</p>
-        </div>
-        <p>Default rhythm: Monday, Wednesday, Friday. Sunday is optional when recovery and schedule allow.</p>
+        <div class="section-label">Begin here</div>
+        <h2 class="section-title">Start here</h2>
+        <p class="section-lead">Use this as a low-friction strength habit — enough stimulus to matter, not so much soreness that it interferes with cycling or life.</p>
       </div>
-      <div class="grid">
-        <article class="card">
+
+      <div class="start-grid">
+        <div class="start-card">
+          <div class="start-card-icon" aria-hidden="true">🎯</div>
           <h3>Goal</h3>
           <p>Build strength, preserve muscle, improve posture, support mood, and protect the lower back.</p>
-        </article>
-        <article class="card">
+        </div>
+        <div class="start-card">
+          <div class="start-card-icon" aria-hidden="true">⚡</div>
           <h3>Effort</h3>
-          <p>Finish most sets with 2-3 good reps in reserve. Smooth form beats fatigue chasing.</p>
-        </article>
-        <article class="card">
+          <p>Finish most sets with 2–3 good reps in reserve. Smooth form beats fatigue chasing.</p>
+        </div>
+        <div class="start-card">
+          <div class="start-card-icon" aria-hidden="true">🏋️</div>
           <h3>Equipment</h3>
-          <p>One kettlebell, a pair of dumbbells or handheld weights, and enough floor space to move cleanly.</p>
-        </article>
+          <p>One kettlebell, a pair of dumbbells, and enough floor space to move cleanly.</p>
+        </div>
       </div>
-      <p class="callout"><strong>Safety:</strong> Stop if you get chest pain, faintness, severe breathlessness, sharp joint pain, neurological symptoms, or back pain that does not settle. Get medical advice if unsure.</p>
+
+      <div class="alert" role="alert">
+        <span class="alert-icon" aria-hidden="true">⚠</span>
+        <p><strong>Safety:</strong> Stop if you get chest pain, faintness, severe breathlessness, sharp joint pain, neurological symptoms, or back pain that does not settle. Get medical advice if unsure.</p>
+      </div>
     </section>
 
+    <!-- PROGRAMME -->
     <section id="programme">
       <div class="section-head">
-        <div>
-          <h2>Six-month build</h2>
-          <p>Each phase has one job. Stay with the phase you are in, then progress when the work feels repeatable.</p>
-        </div>
+        <div class="section-label">The plan</div>
+        <h2 class="section-title">Six-month build</h2>
+        <p class="section-lead">Each phase has one job. Stay with the phase you're in, then progress when the work feels repeatable.</p>
       </div>
-      <div class="phase-grid">
-        <article class="phase">
-          <div><div class="phase-number">1</div><small>Weeks 1-4</small><h3>Learn the movements</h3></div>
+
+      <div class="phases" role="list">
+        <div class="phase" role="listitem">
+          <div class="phase-num">1</div>
+          <div class="phase-weeks">Weeks 1–4</div>
+          <h3>Learn the movements</h3>
           <p>Three sessions weekly. Two to three rounds. Easy weights. Hold swings until the hinge is comfortable.</p>
-        </article>
-        <article class="phase">
-          <div><div class="phase-number">2</div><small>Weeks 5-8</small><h3>Build consistency</h3></div>
+        </div>
+        <div class="phase" role="listitem">
+          <div class="phase-num">2</div>
+          <div class="phase-weeks">Weeks 5–8</div>
+          <h3>Build consistency</h3>
           <p>Three sessions weekly. Three rounds. Add reverse lunges and increase reps gradually.</p>
-        </article>
-        <article class="phase">
-          <div><div class="phase-number">3</div><small>Weeks 9-12</small><h3>Practice swings</h3></div>
+        </div>
+        <div class="phase" role="listitem">
+          <div class="phase-num">3</div>
+          <div class="phase-weeks">Weeks 9–12</div>
+          <h3>Practice swings</h3>
           <p>Start with two sets of ten swings, then complete the normal strength work.</p>
-        </article>
-        <article class="phase">
-          <div><div class="phase-number">4</div><small>Weeks 13-16</small><h3>Load progressively</h3></div>
+        </div>
+        <div class="phase" role="listitem">
+          <div class="phase-num">4</div>
+          <div class="phase-weeks">Weeks 13–16</div>
+          <h3>Load progressively</h3>
           <p>Three to four rounds. Add load once twelve clean reps are comfortable.</p>
-        </article>
-        <article class="phase">
-          <div><div class="phase-number">5</div><small>Weeks 17-20</small><h3>Condition strength</h3></div>
+        </div>
+        <div class="phase" role="listitem">
+          <div class="phase-num">5</div>
+          <div class="phase-weeks">Weeks 17–20</div>
+          <h3>Condition strength</h3>
           <p>Use circuits with a swing, squat or hinge, row or press, and carry or core slot.</p>
-        </article>
-        <article class="phase">
-          <div><div class="phase-number">6</div><small>Weeks 21-24</small><h3>Maintain the habit</h3></div>
+        </div>
+        <div class="phase" role="listitem">
+          <div class="phase-num">6</div>
+          <div class="phase-weeks">Weeks 21–24</div>
+          <h3>Maintain the habit</h3>
           <p>Repeat A/B sessions, progress slowly, and keep the routine alive without chasing exhaustion.</p>
-        </article>
+        </div>
       </div>
     </section>
 
+    <!-- SESSIONS -->
     <section id="sessions">
       <div class="section-head">
-        <div>
-          <h2>The sessions</h2>
-          <p>Warm up, alternate Session A and Session B, and add swing practice from week 9 once technique is solid.</p>
-        </div>
+        <div class="section-label">Training</div>
+        <h2 class="section-title">The sessions</h2>
+        <p class="section-lead">Warm up, alternate Session A and Session B, and add swing practice from week 9 once technique is solid. Default rhythm: Monday, Wednesday, Friday.</p>
       </div>
-      <div class="session-grid">
-        <article class="card">
-          <h3>Warm-up: 2 minutes</h3>
+
+      <div class="sessions-layout">
+        <div class="session-card">
+          <h3>Warm-up · 2 min</h3>
           <ul>
-            <li>March on spot: 30 seconds</li>
-            <li>Arm circles: 30 seconds</li>
-            <li>Hip hinges: 30 seconds</li>
-            <li>Bodyweight squats: 30 seconds</li>
+            <li>March on spot — 30 s</li>
+            <li>Arm circles — 30 s</li>
+            <li>Hip hinges — 30 s</li>
+            <li>Bodyweight squats — 30 s</li>
           </ul>
-        </article>
-        <article class="card">
+          <p class="session-note">Never skip. Two minutes protects joints and primes the movement patterns you're about to train.</p>
+        </div>
+        <div class="session-card">
           <h3>Session A</h3>
           <table>
             <thead><tr><th>Exercise</th><th>Start</th></tr></thead>
@@ -646,9 +972,9 @@
               <tr><td>Farmer carry</td><td>30 seconds</td></tr>
             </tbody>
           </table>
-          <p>Weeks 1-4: 2-3 rounds. Later: 3-4 rounds.</p>
-        </article>
-        <article class="card">
+          <p class="session-note">Weeks 1–4: 2–3 rounds. Later: 3–4 rounds.</p>
+        </div>
+        <div class="session-card">
           <h3>Session B</h3>
           <table>
             <thead><tr><th>Exercise</th><th>Start</th></tr></thead>
@@ -659,127 +985,208 @@
               <tr><td>Plank</td><td>20 seconds</td></tr>
             </tbody>
           </table>
-          <p>Start lunges in week 5 if the first month needs to be gentler.</p>
-        </article>
+          <p class="session-note">Start lunges in week 5 if the first month needs to be gentler.</p>
+        </div>
       </div>
-      <p class="callout"><strong>From week 9:</strong> add swing practice at the start. Weeks 9-12: 2 x 10 swings. Weeks 13-16: 3 x 10-15 swings. From week 17: 15 swings in each circuit if technique is clean.</p>
+
+      <div class="swing-callout">
+        <p><strong>From week 9:</strong> add swing practice at the start. Weeks 9–12: 2 × 10 swings. Weeks 13–16: 3 × 10–15 swings. From week 17: 15 swings in each circuit if technique is clean.</p>
+      </div>
     </section>
 
+    <!-- EXERCISE LIBRARY -->
     <section id="exercises">
       <div class="section-head">
-        <div>
-          <h2>Exercise library</h2>
-          <p>Open any exercise for a plain-English cue and a demonstration video.</p>
-        </div>
+        <div class="section-label">Reference</div>
+        <h2 class="section-title">Exercise library</h2>
+        <p class="section-lead">Open any exercise for a plain-English cue and a demonstration video.</p>
       </div>
-      <div class="exercise-list">
-        <details class="exercise">
-          <summary>Goblet squat</summary>
-          <p>Hold the kettlebell close to your chest. Sit down between your hips as if lowering into a chair. Keep your chest up and stand by pushing the floor away.</p>
-          <iframe class="video" src="https://www.youtube.com/embed/MeIiIdhvXT4" title="Goblet squat video" allowfullscreen></iframe>
+
+      <div class="exercise-grid">
+
+        <details class="exercise" id="ex-goblet">
+          <summary>
+            <span class="exercise-name">Goblet squat</span>
+            <span class="exercise-toggle" aria-hidden="true">+</span>
+          </summary>
+          <div class="exercise-body">
+            <p>Hold the kettlebell close to your chest. Sit down between your hips as if lowering into a chair. Keep your chest up and stand by pushing the floor away.</p>
+            <div class="video-wrap">
+              <iframe data-src="https://www.youtube.com/embed/MeIiIdhvXT4" title="Goblet squat demonstration" allowfullscreen loading="lazy"></iframe>
+            </div>
+          </div>
         </details>
-        <details class="exercise">
-          <summary>Overhead press</summary>
-          <p>Hold dumbbells at shoulder height. Brace your stomach and press them overhead without leaning back. Lower under control.</p>
-          <iframe class="video" src="https://www.youtube.com/embed/qEwKCR5JCog" title="Overhead press video" allowfullscreen></iframe>
+
+        <details class="exercise" id="ex-press">
+          <summary>
+            <span class="exercise-name">Overhead press</span>
+            <span class="exercise-toggle" aria-hidden="true">+</span>
+          </summary>
+          <div class="exercise-body">
+            <p>Hold dumbbells at shoulder height. Brace your stomach and press them overhead without leaning back. Lower under control.</p>
+            <div class="video-wrap">
+              <iframe data-src="https://www.youtube.com/embed/qEwKCR5JCog" title="Overhead press demonstration" allowfullscreen loading="lazy"></iframe>
+            </div>
+          </div>
         </details>
-        <details class="exercise">
-          <summary>One-arm row</summary>
-          <p>Support one hand on a sturdy chair, sofa arm, kitchen counter, or table edge. Pull the weight towards your ribs, keep the movement controlled, and avoid twisting. If nothing feels stable, use a hip-hinged two-arm dumbbell row instead.</p>
-          <iframe class="video" src="https://www.youtube.com/embed/Di628SiVPAk" title="No-bench dumbbell row video" allowfullscreen></iframe>
+
+        <details class="exercise" id="ex-row">
+          <summary>
+            <span class="exercise-name">One-arm row</span>
+            <span class="exercise-toggle" aria-hidden="true">+</span>
+          </summary>
+          <div class="exercise-body">
+            <p>Support one hand on a sturdy surface. Pull the weight towards your ribs, keep the movement controlled, and avoid twisting. If nothing feels stable, use a hip-hinged two-arm dumbbell row instead.</p>
+            <div class="video-wrap">
+              <iframe data-src="https://www.youtube.com/embed/Di628SiVPAk" title="One-arm dumbbell row demonstration" allowfullscreen loading="lazy"></iframe>
+            </div>
+          </div>
         </details>
-        <details class="exercise">
-          <summary>Romanian deadlift</summary>
-          <p>Hold weights in front of you. Push your hips backwards while keeping your back neutral. Feel the hamstring stretch, then stand tall.</p>
-          <iframe class="video" src="https://www.youtube.com/embed/JCXUYuzwNrM" title="Romanian deadlift video" allowfullscreen></iframe>
+
+        <details class="exercise" id="ex-rdl">
+          <summary>
+            <span class="exercise-name">Romanian deadlift</span>
+            <span class="exercise-toggle" aria-hidden="true">+</span>
+          </summary>
+          <div class="exercise-body">
+            <p>Hold weights in front of you. Push your hips backwards while keeping your back neutral. Feel the hamstring stretch, then stand tall.</p>
+            <div class="video-wrap">
+              <iframe data-src="https://www.youtube.com/embed/JCXUYuzwNrM" title="Romanian deadlift demonstration" allowfullscreen loading="lazy"></iframe>
+            </div>
+          </div>
         </details>
-        <details class="exercise">
-          <summary>Reverse lunge</summary>
-          <p>Step backwards, lower under control, then push through the front foot to stand. Start bodyweight only if needed.</p>
-          <iframe class="video" src="https://www.youtube.com/embed/wrwwXE_x-pQ" title="Reverse lunge video" allowfullscreen></iframe>
+
+        <details class="exercise" id="ex-lunge">
+          <summary>
+            <span class="exercise-name">Reverse lunge</span>
+            <span class="exercise-toggle" aria-hidden="true">+</span>
+          </summary>
+          <div class="exercise-body">
+            <p>Step backwards, lower under control, then push through the front foot to stand. Start bodyweight only if needed.</p>
+            <div class="video-wrap">
+              <iframe data-src="https://www.youtube.com/embed/wrwwXE_x-pQ" title="Reverse lunge demonstration" allowfullscreen loading="lazy"></iframe>
+            </div>
+          </div>
         </details>
-        <details class="exercise">
-          <summary>Floor press</summary>
-          <p>Lie on the floor holding dumbbells. Press them up like a bench press. The floor limits shoulder strain.</p>
-          <iframe class="video" src="https://www.youtube.com/embed/uUGDRwge4F8" title="Floor press video" allowfullscreen></iframe>
+
+        <details class="exercise" id="ex-floor">
+          <summary>
+            <span class="exercise-name">Floor press</span>
+            <span class="exercise-toggle" aria-hidden="true">+</span>
+          </summary>
+          <div class="exercise-body">
+            <p>Lie on the floor holding dumbbells. Press them up like a bench press. The floor limits shoulder strain and makes this safe without a spotter.</p>
+            <div class="video-wrap">
+              <iframe data-src="https://www.youtube.com/embed/uUGDRwge4F8" title="Floor press demonstration" allowfullscreen loading="lazy"></iframe>
+            </div>
+          </div>
         </details>
-        <details class="exercise">
-          <summary>Farmer carry</summary>
-          <p>Pick up weights, stand tall, shoulders back, core tight, and walk slowly. This trains grip, posture, trunk and resilience.</p>
-          <iframe class="video" src="https://www.youtube.com/embed/Fkzk_RqlYig" title="Farmer carry video" allowfullscreen></iframe>
+
+        <details class="exercise" id="ex-carry">
+          <summary>
+            <span class="exercise-name">Farmer carry</span>
+            <span class="exercise-toggle" aria-hidden="true">+</span>
+          </summary>
+          <div class="exercise-body">
+            <p>Pick up weights, stand tall, shoulders back, core tight, and walk slowly. Trains grip, posture, trunk stability, and mental resilience.</p>
+            <div class="video-wrap">
+              <iframe data-src="https://www.youtube.com/embed/Fkzk_RqlYig" title="Farmer carry demonstration" allowfullscreen loading="lazy"></iframe>
+            </div>
+          </div>
         </details>
-        <details class="exercise">
-          <summary>Kettlebell swing</summary>
-          <p>This is a hip hinge, not a squat. The hips drive the bell forward. Arms stay relaxed like hooks. Learn this slowly.</p>
-          <iframe class="video" src="https://www.youtube.com/embed/YSxHifyI6s8" title="Kettlebell swing video" allowfullscreen></iframe>
+
+        <details class="exercise" id="ex-swing">
+          <summary>
+            <span class="exercise-name">Kettlebell swing</span>
+            <span class="exercise-toggle" aria-hidden="true">+</span>
+          </summary>
+          <div class="exercise-body">
+            <p>This is a hip hinge, not a squat. The hips drive the bell forward — arms stay relaxed like hooks. Learn this slowly before adding to your sessions.</p>
+            <div class="video-wrap">
+              <iframe data-src="https://www.youtube.com/embed/YSxHifyI6s8" title="Kettlebell swing demonstration" allowfullscreen loading="lazy"></iframe>
+            </div>
+          </div>
         </details>
+
       </div>
     </section>
 
+    <!-- TRACKER -->
     <section id="tracker">
       <div class="section-head">
-        <div>
-          <h2>Weekly tracker</h2>
-          <p>Ticks are stored on this device only. Clearing browser storage clears the tracker.</p>
-        </div>
+        <div class="section-label">Progress</div>
+        <h2 class="section-title">Weekly tracker</h2>
+        <p class="section-lead">Ticks are stored on this device only. Clearing browser storage clears the tracker.</p>
       </div>
-      <div class="tracker-toolbar">
-        <div class="progress-wrap" aria-live="polite">
-          <div class="progress-label">
-            <span id="progressText">0 of 96 sessions complete</span>
-            <span id="progressPercent">0%</span>
+
+      <div class="tracker-header">
+        <div class="progress-area" aria-live="polite">
+          <div class="progress-meta">
+            <span class="progress-count" id="progressText">0 of 96 sessions complete</span>
+            <span class="progress-pct" id="progressPercent">0%</span>
           </div>
-          <div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
+          <div class="progress-track" aria-hidden="true">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
         </div>
-        <button class="button" type="button" id="resetButton">Reset tracker</button>
+        <button class="btn btn-ghost" type="button" id="resetButton">Reset tracker</button>
       </div>
-      <div class="tracker" id="trackerGrid"></div>
+
+      <div class="weeks-grid" id="trackerGrid"></div>
     </section>
 
+    <!-- REMINDERS -->
     <section id="reminders">
       <div class="section-head">
-        <div>
-          <h2>Reminder notifications</h2>
-          <p>Create a calendar file for the full 24-week plan. Import it into Apple Calendar, Google Calendar, Outlook, or your phone calendar and let the calendar handle the alerts.</p>
-        </div>
+        <div class="section-label">Calendar</div>
+        <h2 class="section-title">Reminder notifications</h2>
+        <p class="section-lead">Generate a calendar file for the full 24-week plan and import it into Apple Calendar, Google Calendar, or Outlook.</p>
       </div>
-      <div class="reminder-panel">
-        <div>
-          <h3>Evening routine prompts</h3>
-          <p>The calendar includes Monday, Wednesday, Friday, and optional Sunday sessions at 7:00 PM by default, with a reminder 15 minutes before each workout. The core sessions alternate A/B across the full plan.</p>
-          <p class="calendar-note">Choose the Monday you want to start on. If you pick a different day, the file will automatically move the start to the next Monday.</p>
+
+      <div class="reminder-layout">
+        <div class="reminder-info">
+          <h3>How it works</h3>
+          <p>The calendar includes Monday, Wednesday, Friday, and optional Sunday sessions. Core sessions alternate A/B across the full plan with a 15-minute reminder before each workout.</p>
+          <p>Choose the Monday you want to start on. If you pick a different day, the file will automatically move the start to the next Monday.</p>
+          <p>Events are generated in your local time and import correctly into any major calendar application.</p>
         </div>
         <form class="reminder-form" id="calendarForm">
-          <label class="field" for="startDate">
-            Start date
+          <div class="field">
+            <label for="startDate">Start date</label>
             <input id="startDate" name="startDate" type="date" required />
-          </label>
-          <label class="field" for="reminderTime">
-            Reminder time
+          </div>
+          <div class="field">
+            <label for="reminderTime">Reminder time</label>
             <input id="reminderTime" name="reminderTime" type="time" value="19:00" required />
-          </label>
-          <button class="button" type="submit">Download calendar reminders</button>
+          </div>
+          <button class="btn btn-primary" type="submit" style="width:100%;justify-content:center;">Download calendar file</button>
         </form>
       </div>
     </section>
 
+    <!-- RULES -->
     <section id="rules">
       <div class="section-head">
-        <div>
-          <h2>Progression rules</h2>
-          <p>The rules keep the plan boring in the best way: steady, repeatable, and hard to derail.</p>
-        </div>
+        <div class="section-label">Guidelines</div>
+        <h2 class="section-title">Progression rules</h2>
+        <p class="section-lead">The rules keep the plan boring in the best way — steady, repeatable, and hard to derail.</p>
       </div>
-      <ol class="rules">
-        <li>Start lighter than your ego wants.</li>
-        <li>When all reps feel easy for two sessions, increase reps before increasing weight.</li>
-        <li>When you can do 12 good reps, increase the weight slightly and return to 8 reps.</li>
-        <li>Never progress a movement that feels technically messy.</li>
-        <li>With cycling-heavy weeks, do two sessions rather than forcing four.</li>
-        <li>The programme succeeds when it becomes boringly repeatable.</li>
+
+      <ol class="rules-list">
+        <li><span class="rule-num" aria-hidden="true">01</span><span>Start lighter than your ego wants.</span></li>
+        <li><span class="rule-num" aria-hidden="true">02</span><span>When all reps feel easy for two sessions, increase reps before increasing weight.</span></li>
+        <li><span class="rule-num" aria-hidden="true">03</span><span>When you can do 12 good reps, increase the weight slightly and return to 8 reps.</span></li>
+        <li><span class="rule-num" aria-hidden="true">04</span><span>Never progress a movement that feels technically messy.</span></li>
+        <li><span class="rule-num" aria-hidden="true">05</span><span>With cycling-heavy weeks, do two sessions rather than forcing four.</span></li>
+        <li><span class="rule-num" aria-hidden="true">06</span><span>The programme succeeds when it becomes boringly repeatable.</span></li>
       </ol>
-      <p class="callout"><strong>Minimum effective week:</strong> One Session A and one Session B. That is the fallback plan during busy clinical weeks.</p>
+
+      <div class="alert" style="margin-top:1.5rem;">
+        <span class="alert-icon" aria-hidden="true">⚡</span>
+        <p><strong>Minimum effective week:</strong> One Session A and one Session B. That is the fallback plan during busy weeks.</p>
+      </div>
     </section>
+
   </main>
 
   <footer>
@@ -787,16 +1194,102 @@
   </footer>
 
   <script>
-    const trackerGrid = document.getElementById("trackerGrid");
-    const progressText = document.getElementById("progressText");
+    /* ── lazy-load YouTube iframes ── */
+    document.querySelectorAll(".exercise").forEach((details) => {
+      details.addEventListener("toggle", function onToggle() {
+        if (!details.open) return;
+        const iframe = details.querySelector("iframe[data-src]");
+        if (iframe) {
+          iframe.src = iframe.dataset.src;
+          iframe.removeAttribute("data-src");
+        }
+        const toggle = details.querySelector(".exercise-toggle");
+        if (toggle) toggle.textContent = details.open ? "−" : "+";
+        details.removeEventListener("toggle", onToggle);
+      });
+      details.addEventListener("toggle", () => {
+        const toggle = details.querySelector(".exercise-toggle");
+        if (toggle) toggle.textContent = details.open ? "−" : "+";
+      });
+    });
+
+    /* ── tracker ── */
+    const trackerGrid    = document.getElementById("trackerGrid");
+    const progressText   = document.getElementById("progressText");
     const progressPercent = document.getElementById("progressPercent");
-    const progressFill = document.getElementById("progressFill");
-    const resetButton = document.getElementById("resetButton");
-    const calendarForm = document.getElementById("calendarForm");
-    const startDateInput = document.getElementById("startDate");
+    const progressFill   = document.getElementById("progressFill");
+    const resetButton    = document.getElementById("resetButton");
+    const days = ["Mon", "Wed", "Fri", "Sun (opt)"];
+    const totalSessions  = 24 * days.length;
+
+    function updateProgress() {
+      const completed = document.querySelectorAll("#trackerGrid input:checked").length;
+      const percent   = Math.round((completed / totalSessions) * 100);
+      progressText.textContent    = `${completed} of ${totalSessions} sessions complete`;
+      progressPercent.textContent = `${percent}%`;
+      progressFill.style.width    = `${percent}%`;
+
+      document.querySelectorAll(".week-card").forEach((card) => {
+        const checked = card.querySelectorAll("input:checked").length;
+        card.classList.toggle("complete", checked >= 3);
+        card.querySelector(".week-count").textContent = `${checked}/4`;
+      });
+    }
+
+    for (let week = 1; week <= 24; week++) {
+      const card = document.createElement("article");
+      card.className = "week-card";
+
+      const header = document.createElement("div");
+      header.className = "week-header";
+      const numEl = document.createElement("span");
+      numEl.className = "week-num";
+      numEl.textContent = `Wk ${week}`;
+      const countEl = document.createElement("span");
+      countEl.className = "week-count";
+      countEl.textContent = "0/4";
+      header.appendChild(numEl);
+      header.appendChild(countEl);
+      card.appendChild(header);
+
+      days.forEach((day, index) => {
+        const id    = `week-${week}-${index}`;
+        const label = document.createElement("label");
+        label.className = "check-row";
+
+        const box = document.createElement("input");
+        box.type    = "checkbox";
+        box.id      = id;
+        box.checked = localStorage.getItem(id) === "1";
+        box.addEventListener("change", () => {
+          localStorage[box.checked ? "setItem" : "removeItem"](id, "1");
+          updateProgress();
+        });
+
+        label.appendChild(box);
+        label.appendChild(document.createTextNode(day));
+        card.appendChild(label);
+      });
+
+      trackerGrid.appendChild(card);
+    }
+
+    resetButton.addEventListener("click", () => {
+      if (!confirm("Reset all tracker ticks?")) return;
+      Object.keys(localStorage)
+        .filter((k) => k.startsWith("week-"))
+        .forEach((k) => localStorage.removeItem(k));
+      document.querySelectorAll("#trackerGrid input").forEach((b) => { b.checked = false; });
+      updateProgress();
+    });
+
+    updateProgress();
+
+    /* ── calendar generation ── */
+    const calendarForm    = document.getElementById("calendarForm");
+    const startDateInput  = document.getElementById("startDate");
     const reminderTimeInput = document.getElementById("reminderTime");
-    const days = ["Mon", "Wed", "Fri", "Sun optional"];
-    const totalSessions = 24 * days.length;
+
     const sessionNotes = {
       "Session A": [
         "Warm-up: march on spot, arm circles, hip hinges, bodyweight squats.",
@@ -821,127 +1314,100 @@
       ]
     };
 
-    function updateProgress() {
-      const completed = document.querySelectorAll("#trackerGrid input:checked").length;
-      const percent = Math.round((completed / totalSessions) * 100);
-      progressText.textContent = `${completed} of ${totalSessions} sessions complete`;
-      progressPercent.textContent = `${percent}%`;
-      progressFill.style.width = `${percent}%`;
-
-      document.querySelectorAll(".week-card").forEach((card) => {
-        const checked = card.querySelectorAll("input:checked").length;
-        card.classList.toggle("complete", checked >= 3);
-        card.querySelector("small").textContent = `${checked}/4`;
-      });
-    }
-
-    for (let week = 1; week <= 24; week++) {
-      const card = document.createElement("article");
-      card.className = "week-card";
-
-      const title = document.createElement("h3");
-      title.textContent = `Week ${week}`;
-      const count = document.createElement("small");
-      count.textContent = "0/4";
-      title.appendChild(count);
-      card.appendChild(title);
-
-      days.forEach((day, index) => {
-        const id = `week-${week}-${index}`;
-        const label = document.createElement("label");
-        label.className = "check-row";
-
-        const box = document.createElement("input");
-        box.type = "checkbox";
-        box.checked = localStorage.getItem(id) === "1";
-        box.addEventListener("change", () => {
-          if (box.checked) {
-            localStorage.setItem(id, "1");
-          } else {
-            localStorage.removeItem(id);
-          }
-          updateProgress();
-        });
-
-        label.appendChild(box);
-        label.appendChild(document.createTextNode(day));
-        card.appendChild(label);
-      });
-
-      trackerGrid.appendChild(card);
-    }
-
-    resetButton.addEventListener("click", () => {
-      if (!confirm("Reset all tracker ticks?")) return;
-      Object.keys(localStorage)
-        .filter((key) => key.startsWith("week-"))
-        .forEach((key) => localStorage.removeItem(key));
-      document.querySelectorAll("#trackerGrid input").forEach((box) => {
-        box.checked = false;
-      });
-      updateProgress();
-    });
-
-    updateProgress();
-
     function nextMonday(date) {
-      const result = new Date(date);
-      const day = result.getDay();
-      const diff = (8 - day) % 7 || 0;
-      result.setDate(result.getDate() + diff);
-      return result;
+      const d   = new Date(date);
+      const day = d.getDay();
+      const diff = day === 1 ? 0 : (8 - day) % 7;
+      d.setDate(d.getDate() + diff);
+      return d;
     }
 
     function formatDateInput(date) {
-      const year = date.getFullYear();
-      const month = String(date.getMonth() + 1).padStart(2, "0");
-      const day = String(date.getDate()).padStart(2, "0");
-      return `${year}-${month}-${day}`;
+      return [
+        date.getFullYear(),
+        String(date.getMonth() + 1).padStart(2, "0"),
+        String(date.getDate()).padStart(2, "0")
+      ].join("-");
     }
 
-    function formatCalendarDate(date) {
-      const year = date.getFullYear();
-      const month = String(date.getMonth() + 1).padStart(2, "0");
-      const day = String(date.getDate()).padStart(2, "0");
-      const hours = String(date.getHours()).padStart(2, "0");
-      const minutes = String(date.getMinutes()).padStart(2, "0");
-      const seconds = String(date.getSeconds()).padStart(2, "0");
-      return `${year}${month}${day}T${hours}${minutes}${seconds}`;
+    function formatIcalLocal(date) {
+      return [
+        date.getFullYear(),
+        String(date.getMonth() + 1).padStart(2, "0"),
+        String(date.getDate()).padStart(2, "0"),
+        "T",
+        String(date.getHours()).padStart(2, "0"),
+        String(date.getMinutes()).padStart(2, "0"),
+        "00"
+      ].join("");
     }
 
-    function escapeCalendarText(value) {
-      return value
-        .replace(/\\/g, "\\\\")
-        .replace(/;/g, "\\;")
-        .replace(/,/g, "\\,")
-        .replace(/\n/g, "\\n");
+    function escapeIcal(str) {
+      return str.replace(/\\/g, "\\\\").replace(/;/g, "\\;").replace(/,/g, "\\,").replace(/\n/g, "\\n");
+    }
+
+    function foldLine(line) {
+      const MAX = 75;
+      if (line.length <= MAX) return line;
+      let out = "";
+      let pos = 0;
+      while (pos < line.length) {
+        if (pos === 0) {
+          out += line.slice(0, MAX);
+          pos = MAX;
+        } else {
+          out += "\r\n " + line.slice(pos, pos + MAX - 1);
+          pos += MAX - 1;
+        }
+      }
+      return out;
+    }
+
+    function buildEvent(uid, dtstamp, start, end, summary, description) {
+      const lines = [
+        "BEGIN:VEVENT",
+        `UID:${uid}`,
+        `DTSTAMP:${dtstamp}`,
+        `DTSTART:${start}`,
+        `DTEND:${end}`,
+        `SUMMARY:${escapeIcal(summary)}`,
+        `DESCRIPTION:${escapeIcal(description)}`,
+        "BEGIN:VALARM",
+        "TRIGGER:-PT15M",
+        "ACTION:DISPLAY",
+        `DESCRIPTION:${escapeIcal(summary)}`,
+        "END:VALARM",
+        "END:VEVENT"
+      ];
+      return lines.map(foldLine).join("\r\n");
     }
 
     function buildCalendarFile(startDateValue, timeValue) {
-      const [hours, minutes] = timeValue.split(":").map(Number);
-      const programmeStart = nextMonday(new Date(`${startDateValue}T00:00:00`));
-      const now = formatCalendarDate(new Date());
-      const coreDays = [0, 2, 4];
-      const lines = [
+      const [hours, minutes]   = timeValue.split(":").map(Number);
+      const programmeStart     = nextMonday(new Date(`${startDateValue}T00:00:00`));
+      const dtstamp            = formatIcalLocal(new Date()).replace(/[-:]/g, "");
+      const coreDayOffsets     = [0, 2, 4];
+
+      const header = [
         "BEGIN:VCALENDAR",
         "VERSION:2.0",
         "PRODID:-//Strength Programme//Calendar Reminders//EN",
         "CALSCALE:GREGORIAN",
         "METHOD:PUBLISH"
-      ];
+      ].join("\r\n");
 
+      const events = [];
       let workoutIndex = 0;
+
       for (let week = 1; week <= 24; week++) {
-        coreDays.forEach((offset) => {
+        coreDayOffsets.forEach((offset) => {
           const sessionName = workoutIndex % 2 === 0 ? "Session A" : "Session B";
-          const startsAt = new Date(programmeStart);
+          const startsAt    = new Date(programmeStart);
           startsAt.setDate(programmeStart.getDate() + ((week - 1) * 7) + offset);
           startsAt.setHours(hours, minutes, 0, 0);
-
           const endsAt = new Date(startsAt);
           endsAt.setMinutes(endsAt.getMinutes() + 20);
 
-          const summary = `Week ${week}: ${sessionName}`;
           const description = [
             `Six-Month Strength Programme - Week ${week}`,
             ...sessionNotes[sessionName],
@@ -949,75 +1415,59 @@
             "Aim: finish with 2-3 good reps in reserve."
           ].join("\n");
 
-          lines.push(
-            "BEGIN:VEVENT",
-            `UID:strength-programme-week-${week}-${offset}@drhammadkhan.github.io`,
-            `DTSTAMP:${now}`,
-            `DTSTART:${formatCalendarDate(startsAt)}`,
-            `DTEND:${formatCalendarDate(endsAt)}`,
-            `SUMMARY:${escapeCalendarText(summary)}`,
-            `DESCRIPTION:${escapeCalendarText(description)}`,
-            "BEGIN:VALARM",
-            "TRIGGER:-PT15M",
-            "ACTION:DISPLAY",
-            `DESCRIPTION:${escapeCalendarText(summary)}`,
-            "END:VALARM",
-            "END:VEVENT"
-          );
-          workoutIndex += 1;
+          events.push(buildEvent(
+            `strength-w${week}-d${offset}@drhammadkhan.github.io`,
+            dtstamp,
+            formatIcalLocal(startsAt),
+            formatIcalLocal(endsAt),
+            `Week ${week}: ${sessionName}`,
+            description
+          ));
+          workoutIndex++;
         });
 
-        const optionalStartsAt = new Date(programmeStart);
-        optionalStartsAt.setDate(programmeStart.getDate() + ((week - 1) * 7) + 6);
-        optionalStartsAt.setHours(hours, minutes, 0, 0);
+        const optAt = new Date(programmeStart);
+        optAt.setDate(programmeStart.getDate() + ((week - 1) * 7) + 6);
+        optAt.setHours(hours, minutes, 0, 0);
+        const optEnd = new Date(optAt);
+        optEnd.setMinutes(optEnd.getMinutes() + 20);
 
-        const optionalEndsAt = new Date(optionalStartsAt);
-        optionalEndsAt.setMinutes(optionalEndsAt.getMinutes() + 20);
-
-        const optionalSummary = `Week ${week}: Optional Session`;
-        const optionalDescription = [
+        const optDesc = [
           `Six-Month Strength Programme - Week ${week}`,
           ...sessionNotes["Optional Session"],
           "",
           "Aim: finish feeling better than you started."
         ].join("\n");
 
-        lines.push(
-          "BEGIN:VEVENT",
-          `UID:strength-programme-week-${week}-6@drhammadkhan.github.io`,
-          `DTSTAMP:${now}`,
-          `DTSTART:${formatCalendarDate(optionalStartsAt)}`,
-          `DTEND:${formatCalendarDate(optionalEndsAt)}`,
-          `SUMMARY:${escapeCalendarText(optionalSummary)}`,
-          `DESCRIPTION:${escapeCalendarText(optionalDescription)}`,
-          "BEGIN:VALARM",
-          "TRIGGER:-PT15M",
-          "ACTION:DISPLAY",
-          `DESCRIPTION:${escapeCalendarText(optionalSummary)}`,
-          "END:VALARM",
-          "END:VEVENT"
-        );
+        events.push(buildEvent(
+          `strength-w${week}-d6@drhammadkhan.github.io`,
+          dtstamp,
+          formatIcalLocal(optAt),
+          formatIcalLocal(optEnd),
+          `Week ${week}: Optional Session`,
+          optDesc
+        ));
       }
 
-      lines.push("END:VCALENDAR");
-      return lines.join("\r\n");
+      return [header, ...events, "END:VCALENDAR"].join("\r\n");
     }
 
-    calendarForm.addEventListener("submit", (event) => {
-      event.preventDefault();
-      const calendarText = buildCalendarFile(startDateInput.value, reminderTimeInput.value);
-      const blob = new Blob([calendarText], { type: "text/calendar;charset=utf-8" });
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement("a");
-      link.href = url;
-      link.download = "six-month-strength-programme-reminders.ics";
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
+    calendarForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const text = buildCalendarFile(startDateInput.value, reminderTimeInput.value);
+      const blob = new Blob([text], { type: "text/calendar;charset=utf-8" });
+      const url  = URL.createObjectURL(blob);
+      const a    = document.createElement("a");
+      a.href     = url;
+      a.download = "six-month-strength-programme.ics";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
       URL.revokeObjectURL(url);
     });
 
     startDateInput.value = formatDateInput(nextMonday(new Date()));
   </script>
+
 </body>
 </html>
